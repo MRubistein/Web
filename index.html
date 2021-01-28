@@ -17,8 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
    
     
-    <!-- Third party plugin CSS para ver imagenes en popup-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+   
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
     
@@ -48,14 +47,18 @@
     <!-- Masthead-->
     <header class="masthead"></header>
             
-    <!-- Foto de portada-->
-      
-            <a class="portfolio-box" href="assets/img/inicio/MateoRubistein_Inicioprueba.jpg">
-                <div class="col-sm-12 col-md-12 col-lg-12 mood mood--big" style="background: url(assets/img/inicio/MateoRubistein_Inicioprueba.jpg) 50% / cover no-repeat">
-                    </br>
+    <!-- Foto de portada-->  <!---Tamaño foto normal =  <div class="col-sm-12 col-md-12 col-lg-8 offset-lg-2" en lugar de "container fluid p-0" // y si se pone cover no-repeat ocupa toda la pantalla -->
+           <div class="container-fluid p-0">
 
-                </div>
-            </a>
+                <a class="portfolio-box" href="assets/img/inicio/MateoRubistein_Inicio.jpg">
+                   
+                    <div class="col-sm-12 col-md-12 col-lg-12 mood mood--big" style="background: url(assets/img/inicio/MateoRubistein_Inicio.jpg) 50% / cover no-repeat">
+                    
+                        </br> 
+
+                    </div>
+                 </a>
+            </div>
 
 
             <!-- Texto-->
@@ -66,33 +69,45 @@
             </div>
 
             <div class="col-sm-12 col-md-12 col-lg-6 offset-lg-3 justify-content-center">
-                       
-             Os doy la bienvenida a esta nueva web, que se actualizará cada semana. Para mí es un placer 
-             contar con este espacio donde compartir mi trabajo y contaros las últimas novedades. 
-             Un abrazo, </br>
-             <em>MR</em>
+            <strong>          
+             <h6>¡Muy buenas! Aquí encontraréis las últimas novedades y contenido sobre mi trabajo, actualizado semana a semana. 
+              Actualmente seguimos con la gira de #VidasEnterradas. También podéis verme en plataformas como Movistar +, Filmin o Amazon Prime. 
+             </br> Sentíos libres de navegar y curiosear por la web.
+            
+              Llegarán noticias bonitas pronto.  </br>
+              <em>MR</em>
+              </h6>
+             </strong>
 
             </div></br>
 
 
-            <!-- Lo ultimo-->
-            <div class=" col-sm-12 col-lg-4 offset-lg-4 offset-sm-0 col-md-6 offset-md-3 d-flex justify-content-center">
-            <h2>Lo último: #VidasEnterradas</h2>
+            <!-- Actualmente en-->
+            <div class=" col-sm-12 col-lg-6 offset-lg-3 offset-sm-0  d-flex justify-content-center">
+            <h2>Actualmente en: #VidasEnterradas</h2>
                
             </div>
              
-            <div class="col-sm-12 col-lg-4 offset-lg-4 offset-sm-0 col-md-6 offset-md-3 justify-content-center">
+
+             <!-- Imagenes prensa-->
+
+            <div class="col-sm-12 col-lg-4 offset-lg-4 offset-sm-0 col-md-6 offset-md-3 " >
+                <a href="https://cadenaser.com/programa/a_vivir_que_son_dos_dias/vidas_enterradas/" target="_blank">
+                <img class="img-fluid"  style="margin-left:30px;" src="assets/img/inicio/logopais.png" alt="El Pais" width="190px" /> 
+                </a>
                
-            <img class="img-fluid" src="assets/img/inicio/logopais.png" alt="A picture of the actor Mateo Rubistein 1" width="200px" /> 
-            <img class="img-fluid" src="assets/img/inicio/logoeupress.jpg" alt="A picture of the actor Mateo Rubistein 1" width="200px" />
-                       
+                 
+                <a href="https://www.europapress.es/la-rioja/noticia-41-festival-teatro-logrono-presenta-fin-semana-man-up-vidas-enterradas-20201105093654.html" target="_blank">
+                <img class="img-fluid" src="assets/img/inicio/logoeupress.jpg" alt="Europa Press" width="190px" />
+                </a>     
+
             </div>
             </br>
 
             <!-- Video-->
             <div class=" col-sm-12 col-lg-4 offset-lg-4 offset-sm-0 col-md-6 offset-md-3 d-flex justify-content-center">
                   <span>
-            <h2>Reel TV/ Audiovisual</h2>
+            <h2>Reel 2021</h2>
                  </span>
               </div>
     
@@ -224,30 +239,50 @@
     <!-- About-->
     <!-- Footer-->
     <footer class="bg-light py-5">
-        <div class="container">
-            <div class="small text-left text-muted">
-                <h6>
-                    Representante-Irene Cuadrado
-                    </br>
-                    <a class="color" href="mailto:irenecuadrado@cuadrandoactores.com">irenecuadrado@cuadrandoactores.com</a>
-                    </br>
-                    (+34) 634 24 93 43 </br>
-                    <em>Web oficial del actor</em> Mateo Rubistein. </br>
-                    2020/2021
-                </h6>
+        <div class="container">   <!-- Añadir aqui imagenes-->
+            <div class="row no-gutters">
+            <div class="small text-left text-muted col-lg-9">
+                    <h6>
+                        Representante-Irene Cuadrado
+                        </br>
+                        <a class="color" href="mailto:irenecuadrado@cuadrandoactores.com">irenecuadrado@cuadrandoactores.com</a>
+                        </br>
+                        (+34) 634 24 93 43 </br>
+                        <em>Web oficial del actor</em> Mateo Rubistein. </br>
+                        2020/2021
+
+                   
+                    </h6>
+                 </div>
+                 <div class="col-lg-3 " >
+                    <a href="https://www.instagram.com/mateorubistein/" target="_blank">
+                        <img class="img-fluid" src="assets/img/iconoinsta.webp" alt="Instagram" />
+                    </a>
+                    
+                    <a href="https://vimeo.com/user25924564" target="_blank">
+                        <img class="img-fluid" src="assets/img/iconovimeo.webp" alt="VIMEO" />
+                    </a>
+
+                    <a  href="https://www.imdb.com/name/nm4560810/" target="_blank">
+                        <img class="img-fluid" src="assets/img/iconoimdb.png" alt="IMDB" />
+                    </a>
 
 
+                 </div>
             </div>
         </div>
     </footer>
-    <!-- Bootstrap core JS-->
+    <!-- Bootstrap core JS. Esto hace que la barra de inicio se mantenga en blanco al bajar-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-    <!-- Third party plugin JS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <!-- Third party plugin JS 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
+     <!-- Third party plugin CSS para ver imagenes en popup-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+
 </body>
 </html>
