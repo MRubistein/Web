@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 /*!
 * Start Bootstrap - Creative v6.0.3 (https://startbootstrap.com/themes/creative)
 * Copyright 2013-2020 Start Bootstrap
@@ -10878,4 +10878,19 @@ header.masthead {
         margin-top: 0;
         line-height: 0
     }
+
+/* News Carousel - fixed image size */
+.news-carousel-img-wrapper {
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.news-carousel-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 

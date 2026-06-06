@@ -196,7 +196,7 @@
                         var col = document.createElement('div');
                         col.className = 'col-lg-4 col-sm-8 float-left';
                         col.innerHTML =
-                            '<img class="img-fluid" loading="lazy" src="' + group[j].imgSrc + '" alt="News Photo">' +
+                            '<div class="news-carousel-img-wrapper"><img loading="lazy" src="' + group[j].imgSrc + '" alt="News Photo"></div>' +
                             '<strong>' + group[j].title + '</strong><br/>' +
                             '<a href="' + NEWS_LINK + '">Read more</a>';
                         slide.appendChild(col);
