@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -144,85 +144,12 @@
     </div>
     <br />
 
-    <!-- Carousel de Noticias. Todas las miniaturas deben tener un tamaño de 640*400px-->
+    <!-- News Carousel (loaded dynamically from noticias.html) -->
 
     <div class="container text-center my-3">
         <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-            <div class="carousel-inner w-100" role="listbox">
-
-                <div class="carousel-item row active justify-center">
-
-                    <!-- Noticia 1-->
-
-                    <div class="col-lg-4 col-sm-8 float-left">
-                        <img class="img-fluid" loading="lazy" src="assets/img/miniaturas/MateoRubistein_NoticiaVSE.jpg">
-                        "Buried Lives" <strong>is coming back on tour during 2021</strong> in more than 20 cities of Spain.
-                        <br />
-                        <a href="https://elpais.com/babelia/2020-11-06/las-fosas-que-nos-unen.html" target="_blank">
-                            Press-<em>El País</em>
-                        </a>
-                    </div>
-
-                    <!-- Noticia 2-->
-
-                    <div class="col-lg-4 col-sm-8 float-left">
-                        <img class="img-fluid" loading="lazy" src="assets/img/miniaturas/MateoRubistein_NoticiaHijo.jpg">
-                        <strong>You can already watch "El Hijo"</strong> on Filmin platform.
-                        <br />
-                        <a href="https://www.filmin.es/corto/el-hijo-corto" target="_blank">
-                            Watch now in <em>Filmin</em>
-                        </a>
-                    </div>
-
-                    <!-- Noticia 3-->
-
-                    <div class="col-lg-4 col-sm-8 float-left">
-                        <img class="img-fluid" loading="lazy" src="assets//img/miniaturas/MateoRubistein_NoticiaMax.jpg">
-                        Some of Mateo Rubistein's TV shows, available now on <strong>Amazon Prime Video</strong>.
-                        <br />
-                        <a href="spanish/noticias.html" target="_blank">
-                            News
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Segunda parte del carousel-->
-
-                <div class="carousel-item row justify-center">
-
-                    <!-- Noticia 4-->
-
-                    <div class="col-lg-4 col-sm-8 float-left">
-                        <img class="img-fluid" loading="lazy" src="assets/img/miniaturas/MateoRubistein_NoticiaBarro.JPG">
-                        <strong>"Barro" triumphs at Teatros del Canal.</strong> The latest play by <em> The Young Company </em> brings us closer to the Europe of the First World War.
-
-                        <a href="https://elpais.com/cultura/2018/11/28/actualidad/1543392569_434685.html" target="_blank">
-                            Press - <em>El País</em>
-                        </a>
-                    </div>
-
-                    <!-- Noticia 5-->
-
-                    <div class="col-lg-4 col-sm-8 float-left">
-                        <img class="img-fluid" loading="lazy" src="assets/img/miniaturas/MateoRubistein_NoticiaCDN.jpg">
-                        <strong>Mateo Rubistein, acting for diversity with the youth of Spain</strong> in the prestigious National Drama Center.
-                        <br />
-                        <a href="https://cdn.mcu.es/" target="_blank">
-                            <em>National Drama Center</em>
-                        </a>
-                    </div>
-
-                    <!-- Noticia 6-->
-
-                    <div class="col-lg-4 col-sm-8 float-left">
-                        <img class="img-fluid" loading="lazy" src="assets/img/miniaturas/MateoRubistein_NoticiaFund.jpg">
-                        <strong>The Young Company</strong>, more alive than ever.
-                        <br />
-                        <a href="https://www.lajoven.es/" target="_blank">
-                            <em>The Youth Company</em>
-                        </a>
-                    </div>
-                </div>
+            <div class="carousel-inner w-100" role="listbox" id="newsCarouselInner">
+                <!-- Populated automatically via JS -->
             </div>
             <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -233,8 +160,56 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-
     </div>
+
+    <script>
+    (function() {
+        var NEWS_URL = 'english/noticias.html';
+        var NEWS_LINK = 'english/noticias.html';
+        var ITEMS_PER_SLIDE = 3;
+        var MAX_NEWS = 6;
+
+        fetch(NEWS_URL)
+            .then(function(r) { return r.text(); })
+            .then(function(html) {
+                var doc = new DOMParser().parseFromString(html, 'text/html');
+                var rows = doc.querySelectorAll('.container-fluid > .row.no-gutters');
+                var items = [];
+                for (var i = 0; i < rows.length && items.length < MAX_NEWS; i++) {
+                    var h2 = rows[i].querySelector('h2');
+                    var img = rows[i].querySelector('img');
+                    if (h2 && img) {
+                        items.push({
+                            title: h2.textContent.trim(),
+                            imgSrc: img.getAttribute('src').replace(/^\.\.\//g, '')
+                        });
+                    }
+                }
+                if (!items.length) return;
+
+                var inner = document.getElementById('newsCarouselInner');
+                for (var s = 0; s < items.length; s += ITEMS_PER_SLIDE) {
+                    var slide = document.createElement('div');
+                    slide.className = 'carousel-item row' + (s === 0 ? ' active' : '') + ' justify-center';
+                    var group = items.slice(s, s + ITEMS_PER_SLIDE);
+                    for (var j = 0; j < group.length; j++) {
+                        var col = document.createElement('div');
+                        col.className = 'col-lg-4 col-sm-8 float-left';
+                        col.innerHTML =
+                            '<img class="img-fluid" loading="lazy" src="' + group[j].imgSrc + '" alt="News Photo">' +
+                            '<strong>' + group[j].title + '</strong><br/>' +
+                            '<a href="' + NEWS_LINK + '">Read more</a>';
+                        slide.appendChild(col);
+                    }
+                    inner.appendChild(slide);
+                }
+                // Reinitialize carousel after populating items
+                if (window.jQuery) {
+                    $('#recipeCarousel').carousel();
+                }
+            });
+    })();
+    </script>
 
     <!-- About-->
     <!-- Footer-->
