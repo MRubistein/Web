@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -137,78 +137,161 @@
 
 
 
-    <!-- Espacios entre foto/contacto y texto Noticia-->
-    <br />
-    <div class=" col-sm-12 col-lg-4 offset-lg-4 offset-sm-0 col-md-6 offset-md-3 d-flex justify-content-center">
-        <span>
-            <h2>Latest News</h2>
-        </span>
-    </div>
-    <br />
-
-    <!-- News Carousel (loaded dynamically from noticias.html) -->
-
-    <div class="container text-center my-3">
-        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-            <div class="carousel-inner w-100" role="listbox" id="newsCarouselInner">
-                <!-- Populated automatically via JS -->
+    <!-- News Section -->
+    <section class="home-news-section">
+        <div class="container">
+            <div class="home-news-header">
+                <h2>Latest News</h2>
+                <p>Recent projects, filming and updates</p>
+                <a href="english/noticias.html" class="home-news-view-all">
+                    View all news
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
             </div>
-            <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+
+            <!-- News Carousel -->
+            <div id="recipeCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+                <ol class="carousel-indicators" id="newsCarouselIndicators">
+                    <!-- Populated dynamically via JS -->
+                </ol>
+                <div class="carousel-inner" role="listbox" id="newsCarouselInner">
+                    <!-- Populated automatically via JS -->
+                </div>
+                <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev" aria-label="Previous">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next" aria-label="Next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         </div>
-    </div>
+    </section>
 
     <script>
     (function() {
         var NEWS_URL = 'english/noticias.html';
         var NEWS_LINK = 'english/noticias.html';
-        var ITEMS_PER_SLIDE = 3;
         var MAX_NEWS = 6;
+
+        function getItemsPerSlide() {
+            var width = window.innerWidth;
+            if (width < 768) return 1;
+            if (width < 992) return 2;
+            return 3;
+        }
 
         fetch(NEWS_URL)
             .then(function(r) { return r.text(); })
             .then(function(html) {
                 var doc = new DOMParser().parseFromString(html, 'text/html');
-                var rows = doc.querySelectorAll('.container-fluid > .row.no-gutters');
+                var articles = doc.querySelectorAll('article.news-article, .container-fluid > .row.no-gutters');
                 var items = [];
-                for (var i = 0; i < rows.length && items.length < MAX_NEWS; i++) {
-                    var h2 = rows[i].querySelector('h2');
-                    var img = rows[i].querySelector('img');
+                for (var i = 0; i < articles.length && items.length < MAX_NEWS; i++) {
+                    var h2 = articles[i].querySelector('h2');
+                    var img = articles[i].querySelector('img');
+                    var dateEl = articles[i].querySelector('.news-date-badge, h5');
                     if (h2 && img) {
                         items.push({
                             title: h2.textContent.trim(),
-                            imgSrc: img.getAttribute('src').replace(/^\.\.\//g, '')
+                            imgSrc: img.getAttribute('src').replace(/^\.\.\//g, ''),
+                            date: dateEl ? dateEl.textContent.trim() : ''
                         });
                     }
                 }
                 if (!items.length) return;
 
-                var inner = document.getElementById('newsCarouselInner');
-                for (var s = 0; s < items.length; s += ITEMS_PER_SLIDE) {
-                    var slide = document.createElement('div');
-                    slide.className = 'carousel-item row' + (s === 0 ? ' active' : '') + ' justify-center';
-                    var group = items.slice(s, s + ITEMS_PER_SLIDE);
-                    for (var j = 0; j < group.length; j++) {
-                        var col = document.createElement('div');
-                        col.className = 'col-lg-4 col-sm-8 float-left';
-                        col.innerHTML =
-                            '<div class="news-carousel-img-wrapper"><img loading="lazy" src="' + group[j].imgSrc + '" alt="News Photo"></div>' +
-                            '<strong>' + group[j].title + '</strong><br/>' +
-                            '<a href="' + NEWS_LINK + '">Read more</a>';
-                        slide.appendChild(col);
+                function renderCarousel() {
+                    var itemsPerSlide = getItemsPerSlide();
+                    var colClass = itemsPerSlide === 1 ? 'col-12' : (itemsPerSlide === 2 ? 'col-6' : 'col-lg-4 col-md-6');
+                    var inner = document.getElementById('newsCarouselInner');
+                    var indicators = document.getElementById('newsCarouselIndicators');
+                    inner.innerHTML = '';
+                    indicators.innerHTML = '';
+
+                    var slideIndex = 0;
+                    for (var s = 0; s < items.length; s += itemsPerSlide) {
+                        var slide = document.createElement('div');
+                        slide.className = 'carousel-item' + (slideIndex === 0 ? ' active' : '');
+
+                        var row = document.createElement('div');
+                        row.className = 'row justify-content-center';
+
+                        var group = items.slice(s, s + itemsPerSlide);
+                        for (var j = 0; j < group.length; j++) {
+                            var col = document.createElement('div');
+                            col.className = colClass + ' mb-3 mb-md-0';
+
+                            var badgeHtml = group[j].date ? '<span class="home-news-card-badge">' + group[j].date + '</span>' : '';
+
+                            col.innerHTML =
+                                '<div class="home-news-card">' +
+                                    '<a href="' + NEWS_LINK + '" class="home-news-card-link">' +
+                                        '<div class="home-news-card-img-wrapper">' +
+                                            '<img loading="lazy" src="' + group[j].imgSrc + '" alt="' + group[j].title + '">' +
+                                            badgeHtml +
+                                        '</div>' +
+                                        '<div class="home-news-card-body">' +
+                                            '<h3 class="home-news-card-title">' + group[j].title + '</h3>' +
+                                            '<span class="home-news-card-cta">' +
+                                                'Read more ' +
+                                                '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' +
+                                            '</span>' +
+                                        '</div>' +
+                                    '</a>' +
+                                '</div>';
+                            row.appendChild(col);
+                        }
+                        slide.appendChild(row);
+                        inner.appendChild(slide);
+
+                        var indicator = document.createElement('li');
+                        indicator.setAttribute('data-target', '#recipeCarousel');
+                        indicator.setAttribute('data-slide-to', slideIndex.toString());
+                        if (slideIndex === 0) indicator.className = 'active';
+                        indicators.appendChild(indicator);
+
+                        slideIndex++;
                     }
-                    inner.appendChild(slide);
+
+                    if (window.jQuery) {
+                        $('#recipeCarousel').carousel({
+                            interval: 5000,
+                            pause: 'hover'
+                        });
+                    }
                 }
-                // Reinitialize carousel after populating items
-                if (window.jQuery) {
-                    $('#recipeCarousel').carousel();
-                }
+
+                renderCarousel();
+
+                var currentPerSlide = getItemsPerSlide();
+                var resizeTimer;
+                window.addEventListener('resize', function () {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(function () {
+                        var newPerSlide = getItemsPerSlide();
+                        if (newPerSlide !== currentPerSlide) {
+                            currentPerSlide = newPerSlide;
+                            renderCarousel();
+                        }
+                    }, 250);
+                });
+
+                var touchStartX = 0;
+                var touchEndX = 0;
+                var carouselEl = document.getElementById('recipeCarousel');
+                carouselEl.addEventListener('touchstart', function (e) {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+                carouselEl.addEventListener('touchend', function (e) {
+                    touchEndX = e.changedTouches[0].screenX;
+                    if (touchStartX - touchEndX > 50) {
+                        if (window.jQuery) $('#recipeCarousel').carousel('next');
+                    } else if (touchEndX - touchStartX > 50) {
+                        if (window.jQuery) $('#recipeCarousel').carousel('prev');
+                    }
+                }, { passive: true });
             });
     })();
     </script>
