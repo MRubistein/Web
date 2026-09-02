@@ -1726,6 +1726,11 @@ pre {
     display: none;
 }
 
+.collapse.show,
+.navbar-collapse.show {
+    display: block !important;
+}
+
 .collapsing {
     position: relative;
     height: 0;
@@ -1900,16 +1905,23 @@ pre {
 }
 /*Aqui se controla el toggler, las tres lineas de menu que aparecen al minimizar el navegador*/
 .navbar-toggler {
-    padding: 0.25rem 0.75rem;
+    padding: 0.35rem 0.75rem;
     font-size: 1.25rem;
     line-height: 1;
     background-color: #e0dcf1;
     border: 1px solid transparent;
     border-radius: 0.25rem;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    z-index: 1050;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
     .navbar-toggler:hover, .navbar-toggler:focus {
         text-decoration: none;
+        outline: none;
     }
 
 .navbar-toggler-icon {
@@ -1920,6 +1932,7 @@ pre {
     content: "";
     background: no-repeat center center;
     background-size: 100% 100%;
+    pointer-events: none;
 }
 
 @media (max-width: 575.98px) {
