@@ -274,6 +274,7 @@ button,
 [type=reset],
 [type=submit] {
     -webkit-appearance: button;
+    appearance: button;
 }
 
     button:not(:disabled),
@@ -333,6 +334,7 @@ progress {
 [type=search] {
     outline-offset: -2px;
     -webkit-appearance: none;
+    appearance: none;
 }
 
     [type=search]::-webkit-search-decoration {
@@ -485,10 +487,6 @@ mark,
 }
 
 
-
-.height-20per {
-    /*    height: 30%;*/
-}
 
 .img-thumbnail {
     padding: 0.25rem;
@@ -4063,6 +4061,7 @@ header.masthead {
     margin-bottom: 1rem;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     height: 2.9em;
