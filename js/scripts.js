@@ -1,90 +1,88 @@
-/*!
-    * Start Bootstrap - Creative v6.0.3 (https://startbootstrap.com/themes/creative)
-    * Copyright 2013-2020 Start Bootstrap
-    * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-creative/blob/master/LICENSE)
-    */
-(function ($) {
-	"use strict"; // Start of use strict
+/**
+ * Scripts de Mateo Rubistein - Web Oficial
+ * Sustitución de dependencias de Bootstrap por JavaScript Vanilla nativo
+ */
+document.addEventListener('DOMContentLoaded', function () {
+    "use strict";
 
-	// Smooth scrolling using jQuery easing
-	$('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
-		if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-			var target = $(this.hash);
-			target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-			if (target.length) {
-				$('html, body').animate({
-					scrollTop: (target.offset().top - 72)
-				}, 1000, "easeInOutExpo");
-				return false;
-			}
-		}
-	});
+    // 1. Barra de navegación móvil (Toggle, cerrar al hacer clic en enlace y cerrar al hacer clic fuera)
+    var navbarToggler = document.querySelector('.navbar-toggler');
+    var navbarCollapse = document.querySelector('.navbar-collapse');
+    if (navbarToggler && navbarCollapse) {
+        navbarToggler.addEventListener('click', function (e) {
+            e.stopPropagation();
+            navbarCollapse.classList.toggle('show');
+            var isExpanded = navbarCollapse.classList.contains('show');
+            navbarToggler.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        });
 
-	// Closes responsive menu when a scroll trigger link is clicked
-	$('.js-scroll-trigger').click(function () {
-		$('.navbar-collapse').collapse('hide');
-	});
+        // Cerrar menú al pulsar un enlace
+        document.querySelectorAll('.navbar-nav .nav-link').forEach(function (link) {
+            link.addEventListener('click', function () {
+                navbarCollapse.classList.remove('show');
+                navbarToggler.setAttribute('aria-expanded', 'false');
+            });
+        });
 
-	// Activate scrollspy to add active class to navbar items on scroll
-	$('body').scrollspy({
-		target: '#mainNav',
-		offset: 75
-	});
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', function (e) {
+            if (!navbarCollapse.contains(e.target) && !navbarToggler.contains(e.target)) {
+                navbarCollapse.classList.remove('show');
+                navbarToggler.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
 
-	// Collapse Navbar
-	var navbarCollapse = function () {
-		if ($("#mainNav").offset().top > 100) {
-			$("#mainNav").addClass("navbar-scrolled");
-		} else {
-			$("#mainNav").removeClass("navbar-scrolled");
-		}
-	};
-	// Collapse now if page is not at top
-	navbarCollapse();
-	// Collapse the navbar when page is scrolled
-	$(window).scroll(navbarCollapse);
+    // 2. Fondo del navbar con sombra al hacer scroll
+    var mainNav = document.getElementById('mainNav');
+    if (mainNav) {
+        var handleScroll = function () {
+            if (window.pageYOffset > 100 || document.documentElement.scrollTop > 100) {
+                mainNav.classList.add('navbar-scrolled');
+            } else {
+                mainNav.classList.remove('navbar-scrolled');
+            }
+        };
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+    }
 
-	//Magnific popup calls
-	$('.portfolio-box').magnificPopup({
-		type: 'image'
-	});
+    // 3. Desplazamiento suave para enlaces con ancla interna (#)
+    document.querySelectorAll('a.js-scroll-trigger[href*="#"]:not([href="#"])').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+            var href = this.getAttribute('href');
+            var hashIndex = href.indexOf('#');
+            if (hashIndex !== -1) {
+                var targetId = href.substring(hashIndex + 1);
+                var targetElement = document.getElementById(targetId) || document.querySelector('[name="' + targetId + '"]');
+                if (targetElement) {
+                    e.preventDefault();
+                    var targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - 72;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
 
-	//Magnific popup calls
-	$('.portfolio').magnificPopup({
-		type: 'image',
-		gallery: {
-			enabled: true,
-			navigateByImgClick: true,
-			preload: [0, 1]
-		},
-		image: {
-			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
-		}
-	});
-    /*
-Carousel
-*/
-	//$('#recipeCarousel').carousel({
-	//	interval: 500000
-	//})
+    // 4. Inicialización de lightbox para fotos (Magnific Popup)
+    if (window.jQuery && typeof window.jQuery.fn.magnificPopup === 'function') {
+        window.jQuery('.portfolio-box').magnificPopup({
+            type: 'image'
+        });
 
-	//$('.carousel .carousel-item').each(function () {
-	//	var next = $(this).next();
-	//	if (!next.length) {
-	//		next = $(this).siblings(':first');
-	//	}
-	//	next.children(':first-child').clone().appendTo($(this));
-
-	//	for (var i = 0; i < 2; i++) {
-	//		next = next.next();
-	//		if (!next.length) {
-	//			next = $(this).siblings(':first');
-	//		}
-
-	//		next.children(':first-child').clone().appendTo($(this));
-	//	}
-	//});
-
-
-	$('#nav-bar').load('nav-bar.html');
-}) (jQuery); // End of use strict
+        window.jQuery('.portfolio').magnificPopup({
+            type: 'image',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0, 1]
+            },
+            image: {
+                tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
+            }
+        });
+    }
+});

@@ -21,7 +21,7 @@
     <link rel="alternate" hreflang="en" href="https://www.mateorubistein.com/index-en.html" />
     <!-- Third party plugin CSS-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
+    <!-- Core theme CSS -->
     <link href="css/styles.css" rel="stylesheet" />
 
 </head>
@@ -257,19 +257,89 @@
                             var indicator = document.createElement('li');
                             indicator.setAttribute('data-target', '#recipeCarousel');
                             indicator.setAttribute('data-slide-to', slideIndex.toString());
-                            if (slideIndex === 0) indicator.className = 'active';
-                            indicators.appendChild(indicator);
+                            (function (targetIdx) {
+                                indicator.addEventListener('click', function (e) {
+                                    e.preventDefault();
+                                    showSlide(targetIdx);
+                                    startAutoPlay();
+                                });
+                            })(slideIndex);
 
+                            indicators.appendChild(indicator);
                             slideIndex++;
                         }
 
-                        if (window.jQuery) {
-                            $('#recipeCarousel').carousel({
-                                interval: 5000,
-                                pause: 'hover'
-                            });
+                        showSlide(0);
+                        startAutoPlay();
+                    }
+
+                    // Controles del carrusel Vanilla
+                    var carouselEl = document.getElementById('recipeCarousel');
+                    var currentIndex = 0;
+                    var autoPlayTimer = null;
+
+                    function showSlide(index) {
+                        var slideEls = carouselEl.querySelectorAll('.carousel-item');
+                        var dotEls = carouselEl.querySelectorAll('.carousel-indicators li');
+                        var total = slideEls.length;
+                        if (!total) return;
+                        if (index < 0) index = total - 1;
+                        if (index >= total) index = 0;
+                        currentIndex = index;
+
+                        slideEls.forEach(function (el, i) {
+                            if (i === currentIndex) {
+                                el.classList.add('active');
+                            } else {
+                                el.classList.remove('active');
+                            }
+                        });
+
+                        dotEls.forEach(function (el, i) {
+                            if (i === currentIndex) {
+                                el.classList.add('active');
+                            } else {
+                                el.classList.remove('active');
+                            }
+                        });
+                    }
+
+                    function nextSlide() { showSlide(currentIndex + 1); }
+                    function prevSlide() { showSlide(currentIndex - 1); }
+
+                    function startAutoPlay() {
+                        stopAutoPlay();
+                        autoPlayTimer = setInterval(nextSlide, 5000);
+                    }
+
+                    function stopAutoPlay() {
+                        if (autoPlayTimer) {
+                            clearInterval(autoPlayTimer);
+                            autoPlayTimer = null;
                         }
                     }
+
+                    // Botones anterior y siguiente
+                    var prevBtn = carouselEl.querySelector('.carousel-control-prev');
+                    var nextBtn = carouselEl.querySelector('.carousel-control-next');
+                    if (prevBtn) {
+                        prevBtn.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            prevSlide();
+                            startAutoPlay();
+                        });
+                    }
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            nextSlide();
+                            startAutoPlay();
+                        });
+                    }
+
+                    // Pausar en hover
+                    carouselEl.addEventListener('mouseenter', stopAutoPlay);
+                    carouselEl.addEventListener('mouseleave', startAutoPlay);
 
                     renderCarousel();
 
@@ -286,18 +356,20 @@
                         }, 250);
                     });
 
+                    // Soporte táctil swipe
                     var touchStartX = 0;
                     var touchEndX = 0;
-                    var carouselEl = document.getElementById('recipeCarousel');
                     carouselEl.addEventListener('touchstart', function (e) {
                         touchStartX = e.changedTouches[0].screenX;
                     }, { passive: true });
                     carouselEl.addEventListener('touchend', function (e) {
                         touchEndX = e.changedTouches[0].screenX;
                         if (touchStartX - touchEndX > 50) {
-                            if (window.jQuery) $('#recipeCarousel').carousel('next');
+                            nextSlide();
+                            startAutoPlay();
                         } else if (touchEndX - touchStartX > 50) {
-                            if (window.jQuery) $('#recipeCarousel').carousel('prev');
+                            prevSlide();
+                            startAutoPlay();
                         }
                     }, { passive: true });
                 });
@@ -342,11 +414,8 @@
             </div>
         </div>
     </footer>
-    <!-- Bootstrap core JS. Esto hace que la barra de inicio se mantenga en blanco al bajar-->
+    <!-- Core JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-    <!-- Third party plugin JS
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
     <!-- Core theme JS-->
