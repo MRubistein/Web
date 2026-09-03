@@ -9,19 +9,38 @@
     <title>Mateo Rubistein || Actor</title>
     <!-- Favicon de Mateo Rubistein-->
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-    <!-- Font Awesome icons (free version)
-    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>-->
+
+    <!-- Preload LCP Hero Image -->
+    <link rel="preload" as="image" href="assets/img/inicio/MateoRubistein_Inicio.webp" />
+
     <!-- Google fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Raleway:wght@700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Raleway:wght@400;500;600;700&display=swap"
         rel="stylesheet">
+
     <!-- SEO -->
     <link rel="canonical" href="https://www.mateorubistein.com/" />
     <link rel="alternate" hreflang="es" href="https://www.mateorubistein.com/index.html" />
     <link rel="alternate" hreflang="en" href="https://www.mateorubistein.com/index-en.html" />
     <link rel="alternate" hreflang="x-default" href="https://www.mateorubistein.com/" />
+
+    <!-- Open Graph (Redes Sociales y WhatsApp) -->
+    <meta property="og:title" content="Mateo Rubistein || Actor" />
+    <meta property="og:description"
+        content="Página oficial del actor Mateo Rubistein. Cine, Teatro, Televisión, Videobook y contacto." />
+    <meta property="og:image" content="https://www.mateorubistein.com/assets/img/inicio/MateoRubistein_Inicio.webp" />
+    <meta property="og:url" content="https://www.mateorubistein.com/" />
+    <meta property="og:type" content="profile" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mateo Rubistein || Actor" />
+    <meta name="twitter:description"
+        content="Página oficial del actor Mateo Rubistein. Cine, Teatro, Televisión, Videobook y contacto." />
+    <meta name="twitter:image" content="https://www.mateorubistein.com/assets/img/inicio/MateoRubistein_Inicio.webp" />
+
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
     {
@@ -49,6 +68,47 @@
     </script>
     <!-- Core theme CSS -->
     <link href="css/styles.css?v=2" rel="stylesheet" />
+
+    <!-- Estilos exclusivos para el titular editorial en la esquina de la foto -->
+    <style>
+        .hero-cover-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-corner-signature {
+            position: absolute;
+            bottom: 20px;
+            left: 24px;
+            z-index: 2;
+            pointer-events: none;
+            text-align: left;
+        }
+
+        .hero-corner-title {
+            font-family: "Raleway", sans-serif;
+            font-size: clamp(0.85rem, 1.25vw, 1.05rem);
+            font-weight: 600;
+            letter-spacing: clamp(3px, 0.4vw, 4.5px);
+            text-transform: uppercase;
+            color: #111111;
+            margin: 0;
+            line-height: 1.2;
+            text-shadow: none;
+        }
+
+        @media (max-width: 576px) {
+            .hero-corner-signature {
+                bottom: 12px;
+                left: 14px;
+            }
+
+            .hero-corner-title {
+                font-size: 0.82rem;
+                letter-spacing: 2.5px;
+            }
+        }
+    </style>
 
 </head>
 
@@ -83,9 +143,8 @@
     <!-- Masthead-->
     <header class="masthead"></header>
 
-    <!-- Foto de portada-->
-    <!---Tamaño foto normal =  <div class="col-sm-12 col-md-12 col-lg-8 offset-lg-2" en lugar de "container fluid p-0" // y si se pone cover no-repeat ocupa toda la pantalla -->
-    <div class="container-fluid p-0">
+    <!-- Foto de portada con titular editorial en esquina -->
+    <div class="container-fluid p-0 hero-cover-container">
 
         <a class="portfolio-box" href="assets/img/inicio/MateoRubistein_Inicio.webp">
 
@@ -96,17 +155,16 @@
 
             </div>
         </a>
+
+        <!-- Firma editorial en la esquina inferior izquierda -->
+        <div class="hero-corner-signature">
+            <h1 class="hero-corner-title">Mateo Rubistein</h1>
+        </div>
     </div>
 
 
-    <!-- Texto-->
-    <div class=" col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center">
-
-        <h1>Página oficial de <em>Mateo Rubistein</em></h1>
-
-    </div>
-
-    <div class="col-sm-12 col-md-12 col-lg-4 offset-lg-4 justify-center">
+    <!-- Texto de bienvenida -->
+    <div class="col-sm-12 col-md-12 col-lg-4 offset-lg-4 justify-center" style="margin-top: 1.8rem;">
         <strong>
             <h6>
                 ¡Muy buenas! En esta web encontraréis contenido actualizado sobre mi trabajo.
@@ -161,14 +219,6 @@
 
 
 
-    <div class=" col-sm-12 col-lg-4 offset-lg-4 offset-sm-0 col-md-6 offset-md-3 d-flex justify-content-center">
-        <span>
-            <a href="spanish/video.html">
-                <h3> Ver más</h3>
-            </a>
-        </span>
-    </div>
-
 
 
     <!-- Sección de Noticias -->
@@ -176,9 +226,8 @@
         <div class="container">
             <div class="home-news-header">
                 <h2>Noticias</h2>
-                <p>Últimos proyectos, rodajes y novedades</p>
                 <a href="spanish/noticias.html" class="home-news-view-all">
-                    Ver todas las noticias
+                    Últimos proyectos, rodajes y novedades
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
