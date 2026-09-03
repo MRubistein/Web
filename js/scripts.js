@@ -108,24 +108,139 @@
             });
         });
 
-        // 4. Inicialización de lightbox para fotos (Magnific Popup)
-        if (window.jQuery && typeof window.jQuery.fn.magnificPopup === 'function') {
-            window.jQuery('.portfolio-box').magnificPopup({
-                type: 'image'
+        // 4. Lightbox Vanilla nativo sin jQuery (soporte para fotos individuales y galería con flechas, teclado y swipe)
+        function initVanillaLightbox() {
+            var triggers = document.querySelectorAll('.portfolio, .portfolio-box');
+            if (!triggers.length) return;
+
+            var overlay = document.getElementById('mrLightbox');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'mrLightbox';
+                overlay.className = 'vanilla-lightbox';
+                overlay.setAttribute('role', 'dialog');
+                overlay.setAttribute('aria-modal', 'true');
+                overlay.setAttribute('aria-label', 'Visor de imagen');
+                overlay.innerHTML =
+                    '<button class="vanilla-lightbox-close" aria-label="Cerrar">&times;</button>' +
+                    '<button class="vanilla-lightbox-prev" aria-label="Anterior">&#10094;</button>' +
+                    '<div class="vanilla-lightbox-content">' +
+                        '<img class="vanilla-lightbox-img" src="" alt="Mateo Rubistein" />' +
+                    '</div>' +
+                    '<button class="vanilla-lightbox-next" aria-label="Siguiente">&#10095;</button>';
+                document.body.appendChild(overlay);
+            }
+
+            var imgEl = overlay.querySelector('.vanilla-lightbox-img');
+            var prevBtn = overlay.querySelector('.vanilla-lightbox-prev');
+            var nextBtn = overlay.querySelector('.vanilla-lightbox-next');
+            var closeBtn = overlay.querySelector('.vanilla-lightbox-close');
+
+            var currentList = [];
+            var currentIndex = 0;
+
+            function updateImage() {
+                if (!currentList.length) return;
+                var currentItem = currentList[currentIndex];
+                var src = currentItem.getAttribute('href') || currentItem.getAttribute('data-src');
+                var childImg = currentItem.querySelector('img');
+                var alt = (childImg && childImg.getAttribute('alt')) || 'Mateo Rubistein';
+                imgEl.src = src;
+                imgEl.alt = alt;
+            }
+
+            function openLightbox(list, index) {
+                currentList = list;
+                currentIndex = index;
+                updateImage();
+                overlay.classList.add('active');
+                document.body.classList.add('lightbox-open');
+                if (currentList.length > 1) {
+                    prevBtn.style.display = 'flex';
+                    nextBtn.style.display = 'flex';
+                } else {
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                }
+            }
+
+            function closeLightbox() {
+                overlay.classList.remove('active');
+                document.body.classList.remove('lightbox-open');
+                imgEl.src = '';
+            }
+
+            function nextImage() {
+                if (currentList.length <= 1) return;
+                currentIndex = (currentIndex + 1) % currentList.length;
+                updateImage();
+            }
+
+            function prevImage() {
+                if (currentList.length <= 1) return;
+                currentIndex = (currentIndex - 1 + currentList.length) % currentList.length;
+                updateImage();
+            }
+
+            // Delegación de clic para fotos de galería (.portfolio)
+            var portfolioElements = Array.prototype.slice.call(document.querySelectorAll('.portfolio'));
+            portfolioElements.forEach(function (el, idx) {
+                el.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    openLightbox(portfolioElements, idx);
+                });
             });
 
-            window.jQuery('.portfolio').magnificPopup({
-                type: 'image',
-                gallery: {
-                    enabled: true,
-                    navigateByImgClick: true,
-                    preload: [0, 1]
-                },
-                image: {
-                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
+            // Delegación de clic para fotos individuales (.portfolio-box)
+            var singleBoxElements = Array.prototype.slice.call(document.querySelectorAll('.portfolio-box'));
+            singleBoxElements.forEach(function (el) {
+                el.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    openLightbox([el], 0);
+                });
+            });
+
+            // Botones de acción
+            closeBtn.addEventListener('click', closeLightbox);
+            nextBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                nextImage();
+            });
+            prevBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                prevImage();
+            });
+
+            // Cerrar al hacer clic en el fondo exterior
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay || e.target.classList.contains('vanilla-lightbox-content')) {
+                    closeLightbox();
                 }
             });
+
+            // Navegación accesible con teclado
+            document.addEventListener('keydown', function (e) {
+                if (!overlay.classList.contains('active')) return;
+                if (e.key === 'Escape' || e.keyCode === 27) closeLightbox();
+                if (e.key === 'ArrowRight' || e.keyCode === 39) nextImage();
+                if (e.key === 'ArrowLeft' || e.keyCode === 37) prevImage();
+            });
+
+            // Gestos táctiles (Swipe izquierda / derecha en móviles)
+            var touchStartX = 0;
+            overlay.addEventListener('touchstart', function (e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            overlay.addEventListener('touchend', function (e) {
+                var touchEndX = e.changedTouches[0].screenX;
+                if (touchStartX - touchEndX > 50) {
+                    nextImage();
+                } else if (touchEndX - touchStartX > 50) {
+                    prevImage();
+                }
+            }, { passive: true });
         }
+        initVanillaLightbox();
     }
 
     // Ejecutar de inmediato o cuando el DOM esté listo
