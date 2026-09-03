@@ -14,7 +14,9 @@
     <!-- Google fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Raleway:wght@700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Raleway:wght@700&display=swap"
+        rel="stylesheet">
     <!-- SEO -->
     <link rel="canonical" href="https://www.mateorubistein.com/" />
     <link rel="alternate" hreflang="es" href="https://www.mateorubistein.com/index.html" />
@@ -177,7 +179,11 @@
                 <p>Últimos proyectos, rodajes y novedades</p>
                 <a href="spanish/noticias.html" class="home-news-view-all">
                     Ver todas las noticias
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
                 </a>
             </div>
 
@@ -189,11 +195,13 @@
                 <div class="carousel-inner" role="listbox" id="newsCarouselInner">
                     <!-- Se rellena automáticamente con JS -->
                 </div>
-                <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev" aria-label="Anterior">
+                <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev"
+                    aria-label="Anterior">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Anterior</span>
                 </a>
-                <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next" aria-label="Siguiente">
+                <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next"
+                    aria-label="Siguiente">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Siguiente</span>
                 </a>
@@ -259,19 +267,19 @@
 
                                 col.innerHTML =
                                     '<div class="home-news-card">' +
-                                        '<a href="' + NEWS_LINK + '" class="home-news-card-link">' +
-                                            '<div class="home-news-card-img-wrapper">' +
-                                                '<img loading="lazy" src="' + group[j].imgSrc + '" alt="' + group[j].title + '">' +
-                                                badgeHtml +
-                                            '</div>' +
-                                            '<div class="home-news-card-body">' +
-                                                '<h3 class="home-news-card-title">' + group[j].title + '</h3>' +
-                                                '<span class="home-news-card-cta">' +
-                                                    'Ver noticia ' +
-                                                    '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' +
-                                                '</span>' +
-                                            '</div>' +
-                                        '</a>' +
+                                    '<a href="' + NEWS_LINK + '" class="home-news-card-link">' +
+                                    '<div class="home-news-card-img-wrapper">' +
+                                    '<img loading="lazy" src="' + group[j].imgSrc + '" alt="' + group[j].title + '">' +
+                                    badgeHtml +
+                                    '</div>' +
+                                    '<div class="home-news-card-body">' +
+                                    '<h3 class="home-news-card-title">' + group[j].title + '</h3>' +
+                                    '<span class="home-news-card-cta">' +
+                                    'Ver noticia ' +
+                                    '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' +
+                                    '</span>' +
+                                    '</div>' +
+                                    '</a>' +
                                     '</div>';
                                 row.appendChild(col);
                             }
