@@ -4698,16 +4698,84 @@ header.masthead h1 {
     }
 }
 
+/* ==========================================================================
+   Footer Redesign — Elegante & Compacto
+   ========================================================================== */
+footer.bg-light.py-5 {
+    background-color: #51ffde !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding-top: 1.75rem !important;
+    padding-bottom: 1.75rem !important;
+}
+
+footer .row {
+    align-items: center;
+}
+
+footer .small h6 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.84rem;
+    font-weight: 500;
+    line-height: 1.65;
+    color: #212529;
+    margin-bottom: 0;
+}
+
+footer .small h6 em {
+    font-style: normal;
+    color: #495057;
+    font-size: 0.78rem;
+}
+
+footer .small a.color,
+footer .small a {
+    color: #111 !important;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer .small a.color:hover,
+footer .small a:hover {
+    color: #000 !important;
+    text-decoration: underline;
+}
+
+footer .col-lg-3 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.25rem;
+}
+
+footer .col-lg-3 a img {
+    width: 24px !important;
+    height: 24px !important;
+    object-fit: contain;
+    opacity: 0.75;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    vertical-align: middle;
+}
+
+footer .col-lg-3 a:hover img {
+    opacity: 1;
+    transform: translateY(-1.5px);
+}
+
 @media (max-width: 991.98px) {
+    footer.bg-light.py-5 {
+        padding-top: 1.35rem !important;
+        padding-bottom: 1.35rem !important;
+    }
+
     footer .small.text-left {
         text-align: center !important;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
 
     footer .col-lg-3 {
-        display: flex;
         justify-content: center;
-        gap: 1.25rem;
+        gap: 1.5rem;
     }
 }
 
@@ -4819,5 +4887,33 @@ body.lightbox-open {
         padding-left: 1.5rem !important;
         padding-right: 1.5rem !important;
         overflow-wrap: break-word;
+    }
+}
+
+/* Reducción moderada del header en móvil y tablet */
+@media (max-width: 991.98px) {
+    #mainNav.py-3 {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+    }
+
+    .imag-brand {
+        height: 80px;
+        width: auto;
+    }
+
+    header.masthead {
+        padding-bottom: 4rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .imag-brand {
+        height: 70px;
+        width: auto;
+    }
+
+    header.masthead {
+        padding-bottom: 3.5rem;
     }
 }
