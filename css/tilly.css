@@ -1,0 +1,817 @@
+/* ═══════════════════════════════════════════════════════
+   Te quiero, Tilly — Estilo "diario personal"
+   Prefijo .tilly- para evitar colisiones con styles.css
+   ═══════════════════════════════════════════════════════ */
+
+/* ───── Tokens ───── */
+:root {
+    --tilly-bg: #fdf6e3;
+    --tilly-bg-warm: #faf0d7;
+    --tilly-bg-page: #fff9ee;
+    --tilly-text: #3a2e22;
+    --tilly-text-mid: #5c4f3d;
+    --tilly-text-light: #9b8e7a;
+    --tilly-accent: #c75a3a;
+    --tilly-accent-hover: #a8462b;
+    --tilly-accent-soft: #e8a87c;
+    --tilly-pink: #e8919a;
+    --tilly-pink-soft: #f5c6cb;
+    --tilly-blue-soft: #a8c8e8;
+    --tilly-yellow: #f5d98a;
+    --tilly-yellow-soft: #fef3c7;
+    --tilly-border: #d4c5a9;
+    --tilly-border-dotted: #c9b896;
+    --tilly-white: #fffdf7;
+    --tilly-success: #6a9a5b;
+    --tilly-locked: #c8c0b6;
+    --tilly-font-hand: "Caveat", cursive;
+    --tilly-font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+    --tilly-font-body: "Raleway", "Merriweather Sans", Helvetica, Arial, sans-serif;
+    --tilly-radius: 4px;
+    --tilly-max-width: 720px;
+}
+
+/* ───── Base del contenido Tilly ───── */
+.tilly-page {
+    background-color: var(--tilly-bg);
+    background-image:
+        repeating-linear-gradient(transparent,
+            transparent 31px,
+            rgba(180, 160, 130, 0.18) 31px,
+            rgba(180, 160, 130, 0.18) 32px);
+    background-size: 100% 32px;
+    color: var(--tilly-text);
+    font-family: var(--tilly-font-body);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+}
+
+.tilly-section {
+    padding: 2.5rem 1.5rem;
+    max-width: var(--tilly-max-width);
+    margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════
+   1. HERO — Foto pegada al lado del texto
+   ═══════════════════════════════════════════════════════ */
+.tilly-hero {
+    padding-top: 3rem;
+    padding-bottom: 2.5rem;
+}
+
+.tilly-hero__layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+/* ── Foto "pegada" con cinta adhesiva ── */
+.tilly-hero__photo-wrapper {
+    position: relative;
+    flex-shrink: 0;
+    width: 220px;
+    transform: rotate(-2deg);
+    padding: 8px;
+    background: #fff;
+    box-shadow:
+        2px 3px 8px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+}
+
+/* Cinta adhesiva superior */
+.tilly-hero__tape {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(2deg);
+    width: 80px;
+    height: 20px;
+    background: var(--tilly-yellow);
+    opacity: 0.65;
+    border-radius: 2px;
+    z-index: 2;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.tilly-hero__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center top;
+}
+
+/* ── Contenido del hero ── */
+.tilly-hero__content {
+    color: var(--tilly-text);
+}
+
+.tilly-hero__title {
+    font-family: var(--tilly-font-hand);
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+    transform: rotate(-0.5deg);
+}
+
+.tilly-hero__subtitle {
+    font-family: var(--tilly-font-hand);
+    font-size: clamp(1.1rem, 3vw, 1.35rem);
+    font-weight: 400;
+    line-height: 1.45;
+    margin: 0 0 0.5rem;
+    color: var(--tilly-text-mid);
+}
+
+.tilly-hero__subtitle strong {
+    color: var(--tilly-text);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--tilly-pink);
+}
+
+.tilly-hero__counter {
+    display: inline-block;
+    font-family: var(--tilly-font-hand);
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1rem 0 1.3rem;
+    opacity: 0.7;
+    background: var(--tilly-yellow-soft);
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    border: 1px dashed var(--tilly-border);
+}
+
+.tilly-hero__ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.2rem;
+}
+
+/* ── Botones estilo "pegatina" ── */
+.tilly-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.4rem;
+    font-family: var(--tilly-font-hand);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 2px dashed transparent;
+    text-align: center;
+    position: relative;
+}
+
+.tilly-btn--primary {
+    background: var(--tilly-accent);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.15);
+    transform: rotate(-0.8deg);
+}
+
+.tilly-btn--primary:hover {
+    background: var(--tilly-accent-hover);
+    transform: rotate(0deg) translateY(-2px);
+    box-shadow: 3px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.tilly-btn--ghost {
+    background: rgba(0, 0, 0, 0.03);
+    color: var(--tilly-text);
+    border: 2px dashed var(--tilly-border);
+    transform: rotate(0.5deg);
+}
+
+.tilly-btn--ghost:hover {
+    border-color: var(--tilly-accent);
+    color: var(--tilly-accent);
+    transform: rotate(0deg) translateY(-1px);
+}
+
+.tilly-hero__disclaimer {
+    font-size: 0.72rem;
+    opacity: 0.45;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: none;
+    border: none;
+    color: var(--tilly-text-light);
+    padding: 0;
+    font-family: var(--tilly-font-body);
+}
+
+.tilly-hero__disclaimer:hover {
+    opacity: 0.7;
+}
+
+.tilly-disclaimer-tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.8rem 1rem;
+    border-radius: var(--tilly-radius);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    z-index: 10;
+    max-width: 340px;
+}
+
+.tilly-disclaimer-tooltip.is-visible {
+    display: block;
+}
+
+/* ═══════════════════════════════════════════════════════
+   2. VOTACIÓN
+   ═══════════════════════════════════════════════════════ */
+.tilly-poll {
+    background: var(--tilly-bg-page);
+    border-top: 3px dashed var(--tilly-border-dotted);
+    border-bottom: 3px dashed var(--tilly-border-dotted);
+    position: relative;
+    transform: rotate(0.3deg);
+}
+
+/* Decoración de "cinta adhesiva" arriba */
+.tilly-poll::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 80px;
+    height: 16px;
+    background: var(--tilly-yellow);
+    opacity: 0.7;
+    border-radius: 2px;
+    z-index: 2;
+}
+
+.tilly-poll__question {
+    font-family: var(--tilly-font-hand);
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-weight: 700;
+    margin: 0 0 0.8rem;
+    line-height: 1.2;
+    color: var(--tilly-accent);
+}
+
+.tilly-poll__context,
+.tilly-poll__dilemma {
+    font-family: var(--tilly-font-hand);
+    font-size: 1.1rem;
+    color: var(--tilly-text-mid);
+    margin: 0 0 0.4rem;
+    font-style: normal;
+}
+
+.tilly-poll__dilemma {
+    margin-bottom: 1.2rem;
+}
+
+.tilly-poll__question-short {
+    font-family: var(--tilly-font-hand);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--tilly-text);
+    margin: 0 0 1rem;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--tilly-pink);
+}
+
+.tilly-poll__options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.tilly-poll__option-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem 1.2rem;
+    font-family: var(--tilly-font-hand);
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-align: left;
+    background: var(--tilly-white);
+    color: var(--tilly-text);
+    border: 2px dashed var(--tilly-border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.06);
+}
+
+.tilly-poll__option-btn:first-child {
+    transform: rotate(-0.5deg);
+}
+
+.tilly-poll__option-btn:last-child {
+    transform: rotate(0.5deg);
+}
+
+.tilly-poll__option-btn:hover {
+    border-color: var(--tilly-accent);
+    color: var(--tilly-accent);
+    transform: rotate(0deg) translateY(-2px);
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+}
+
+.tilly-poll__option-btn:disabled {
+    cursor: default;
+    opacity: 1;
+}
+
+.tilly-poll__note {
+    font-family: var(--tilly-font-hand);
+    font-size: 0.95rem;
+    color: var(--tilly-text-light);
+    margin-top: 0.5rem;
+}
+
+/* ── Resultados de votación ── */
+.tilly-poll__result {
+    display: none;
+}
+
+.tilly-poll__result.is-visible {
+    display: block;
+}
+
+.tilly-poll__voted-msg {
+    font-family: var(--tilly-font-hand);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+    color: var(--tilly-accent);
+}
+
+.tilly-poll__voted-pct {
+    font-family: var(--tilly-font-hand);
+    font-size: 1.1rem;
+    color: var(--tilly-text-mid);
+    margin: 0 0 1.5rem;
+}
+
+.tilly-poll__bar-container {
+    margin-bottom: 1.5rem;
+}
+
+.tilly-poll__bar-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    gap: 0.75rem;
+}
+
+.tilly-poll__bar-label {
+    font-family: var(--tilly-font-hand);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--tilly-text-mid);
+    min-width: 0;
+    flex-shrink: 1;
+    flex-basis: 40%;
+    line-height: 1.3;
+}
+
+.tilly-poll__bar-track {
+    flex-grow: 1;
+    height: 10px;
+    background: var(--tilly-border);
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px dashed rgba(0, 0, 0, 0.08);
+}
+
+.tilly-poll__bar-fill {
+    height: 100%;
+    border-radius: 5px;
+    background: var(--tilly-accent);
+    transition: width 0.6s ease;
+}
+
+.tilly-poll__bar-fill--b {
+    background: var(--tilly-pink);
+}
+
+.tilly-poll__bar-pct {
+    font-family: var(--tilly-font-hand);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--tilly-text);
+    min-width: 3rem;
+    text-align: right;
+}
+
+.tilly-poll__total-votes {
+    font-family: var(--tilly-font-hand);
+    font-size: 0.95rem;
+    color: var(--tilly-text-light);
+    margin-top: 0.25rem;
+}
+
+.tilly-poll__closed-msg {
+    font-family: var(--tilly-font-hand);
+    font-size: 1rem;
+    color: var(--tilly-text-light);
+    padding: 1rem 0;
+}
+
+/* ═══════════════════════════════════════════════════════
+   3. RESULTADO + COMPARTIR
+   ═══════════════════════════════════════════════════════ */
+.tilly-share {
+    display: none;
+    text-align: center;
+    padding-top: 0;
+}
+
+.tilly-share.is-visible {
+    display: block;
+}
+
+.tilly-share__btns {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.tilly-btn--share {
+    background: var(--tilly-text);
+    color: var(--tilly-white);
+    font-size: 0.95rem;
+    padding: 0.7rem 1.3rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.12);
+}
+
+.tilly-btn--share:hover {
+    background: var(--tilly-text-mid);
+}
+
+.tilly-btn--copy {
+    background: transparent;
+    color: var(--tilly-text);
+    border: 2px dashed var(--tilly-border);
+    font-size: 0.95rem;
+    padding: 0.7rem 1.3rem;
+    border-radius: 10px;
+}
+
+.tilly-btn--copy:hover {
+    border-color: var(--tilly-text);
+}
+
+.tilly-share__feedback {
+    font-family: var(--tilly-font-hand);
+    font-size: 1rem;
+    color: var(--tilly-success);
+    margin-top: 0.5rem;
+    min-height: 1.2rem;
+}
+
+/* ═══════════════════════════════════════════════════════
+   4. ÚLTIMO INTENTO (VÍDEO)
+   ═══════════════════════════════════════════════════════ */
+.tilly-latest {
+    border-top: 3px dashed var(--tilly-border-dotted);
+    position: relative;
+}
+
+.tilly-section-label {
+    font-family: var(--tilly-font-hand);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--tilly-text-light);
+    margin: 0 0 1.2rem;
+    display: inline-block;
+    background: var(--tilly-yellow-soft);
+    padding: 0.2rem 0.8rem;
+    border-radius: 4px;
+    transform: rotate(-1deg);
+    border: 1px dashed var(--tilly-border);
+}
+
+.tilly-latest__title {
+    font-family: var(--tilly-font-hand);
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
+}
+
+.tilly-latest__attempt-label {
+    font-family: var(--tilly-font-hand);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--tilly-accent);
+    margin: 0 0 0.6rem;
+}
+
+.tilly-latest__desc {
+    font-family: var(--tilly-font-hand);
+    font-size: 1.1rem;
+    color: var(--tilly-text-mid);
+    margin: 0 0 1.5rem;
+    line-height: 1.5;
+}
+
+/* ── Reproductor lazy ── */
+.tilly-player {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto 2rem;
+    aspect-ratio: 9 / 16;
+    border-radius: 2px;
+    overflow: hidden;
+    background: #111;
+    cursor: pointer;
+    /* Estilo foto pegada */
+    padding: 6px;
+    background: #fff;
+    box-shadow:
+        2px 3px 8px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(0, 0, 0, 0.04);
+    transform: rotate(1deg);
+}
+
+.tilly-player__poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.tilly-player__play {
+    position: absolute;
+    inset: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    transition: background 0.2s;
+}
+
+.tilly-player:hover .tilly-player__play {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.tilly-player__play-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.tilly-player:hover .tilly-player__play-icon {
+    transform: scale(1.08);
+}
+
+.tilly-player__play-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--tilly-text);
+    margin-left: 3px;
+}
+
+.tilly-player iframe {
+    position: absolute;
+    inset: 6px;
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+    border: 0;
+}
+
+.tilly-player__fallback {
+    display: none;
+    position: absolute;
+    inset: 6px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-family: var(--tilly-font-hand);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.tilly-player__fallback.is-visible {
+    display: flex;
+}
+
+/* ── Social links del intento ── */
+.tilly-latest__social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.tilly-social-link {
+    font-family: var(--tilly-font-hand);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--tilly-text-light);
+    text-decoration: none;
+    transition: color 0.2s;
+    border-bottom: 1px dashed var(--tilly-border);
+    padding-bottom: 2px;
+}
+
+.tilly-social-link:hover {
+    color: var(--tilly-accent);
+    border-bottom-color: var(--tilly-accent);
+}
+
+/* ═══════════════════════════════════════════════════════
+   8. CTA FINAL
+   ═══════════════════════════════════════════════════════ */
+.tilly-cta-final {
+    border-top: 3px dashed var(--tilly-border-dotted);
+    text-align: center;
+    position: relative;
+    transform: rotate(-0.2deg);
+}
+
+.tilly-cta-final__title {
+    font-family: var(--tilly-font-hand);
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
+}
+
+.tilly-cta-final__subtitle {
+    font-family: var(--tilly-font-hand);
+    font-size: 1.1rem;
+    color: var(--tilly-text-mid);
+    margin: 0 0 1.5rem;
+}
+
+.tilly-cta-final__links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.tilly-cta-final__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--tilly-font-hand);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--tilly-text);
+    text-decoration: none;
+    padding: 0.5rem 0.9rem;
+    border: 2px dashed var(--tilly-border);
+    border-radius: 10px;
+    transition: all 0.25s;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.06);
+}
+
+.tilly-cta-final__link:hover {
+    border-color: var(--tilly-accent);
+    color: var(--tilly-accent);
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+}
+
+.tilly-cta-final__link svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   LOADING / ERROR
+   ═══════════════════════════════════════════════════════ */
+.tilly-loading {
+    display: none;
+    text-align: center;
+    padding: 1rem 0;
+    color: var(--tilly-text-light);
+    font-family: var(--tilly-font-hand);
+    font-size: 1rem;
+}
+
+.tilly-loading.is-visible {
+    display: block;
+}
+
+.tilly-error {
+    display: none;
+    text-align: center;
+    padding: 1rem;
+    color: var(--tilly-accent);
+    font-family: var(--tilly-font-hand);
+    font-size: 1rem;
+    background: rgba(199, 90, 58, 0.06);
+    border-radius: 8px;
+    border: 1px dashed var(--tilly-accent-soft);
+}
+
+.tilly-error.is-visible {
+    display: block;
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE — Tablet / Desktop
+   ═══════════════════════════════════════════════════════ */
+@media (min-width: 600px) {
+    .tilly-hero__layout {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 2.5rem;
+    }
+
+    .tilly-hero__photo-wrapper {
+        width: 240px;
+    }
+}
+
+@media (min-width: 768px) {
+    .tilly-section {
+        padding: 3.5rem 2rem;
+    }
+
+    .tilly-hero__layout {
+        gap: 3rem;
+    }
+
+    .tilly-hero__photo-wrapper {
+        width: 280px;
+    }
+
+    .tilly-hero__ctas {
+        flex-direction: row;
+    }
+
+    .tilly-poll__options {
+        flex-direction: row;
+    }
+
+    .tilly-poll__option-btn {
+        flex: 1;
+    }
+
+    .tilly-poll__bar-label {
+        flex-basis: auto;
+        min-width: 140px;
+    }
+
+    .tilly-player {
+        max-width: 300px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .tilly-section {
+        padding: 4rem 2rem;
+    }
+
+    :root {
+        --tilly-max-width: 780px;
+    }
+
+    .tilly-hero__photo-wrapper {
+        width: 300px;
+    }
+}
