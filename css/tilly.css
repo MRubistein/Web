@@ -582,25 +582,21 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   PEGATINAS DE REDES — al lado del roadmap
+   PEGATINAS DE REDES — debajo de fotos y antes de roadmap
    ═══════════════════════════════════════════════════════ */
 .tilly-social-stickers {
     display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+    flex-direction: row;
+    gap: 0.85rem;
     align-items: center;
-    width: auto;
-}
-
-.tilly-social-stickers__icons {
-    display: flex;
-    gap: 0.6rem;
-    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .tilly-sticker {
     border-radius: 14px;
-    padding: 0.45rem 0.85rem;
     box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.12);
     width: auto;
     border: none;
@@ -609,7 +605,7 @@
 .tilly-sticker a {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
+    justify-content: center;
     text-decoration: none;
     font-family: var(--tilly-font-hand);
     font-size: 0.85rem;
@@ -635,11 +631,30 @@
     height: 22px;
 }
 
-/* ── Instagram: gradiente con texto más pequeño ── */
+/* ── Stickers solo icono (Instagram, TikTok y YouTube) ── */
+.tilly-sticker--icon-only {
+    padding: 0;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+}
+
+.tilly-sticker--icon-only a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+}
+
+/* ── Instagram: gradiente ── */
 .tilly-sticker--ig {
     background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7);
     transform: rotate(-1.5deg);
-    padding: 0.4rem 0.8rem;
 }
 
 .tilly-sticker--ig a {
@@ -649,28 +664,6 @@
 .tilly-sticker--ig .tilly-sticker__icon svg {
     stroke: #fff;
     fill: none;
-}
-
-.tilly-sticker--ig .tilly-sticker__text {
-    font-size: 0.8rem;
-    line-height: 1.15;
-    white-space: nowrap;
-}
-
-/* ── Stickers solo icono (TikTok y YouTube) ── */
-.tilly-sticker--icon-only {
-    padding: 0.45rem;
-    border-radius: 12px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-}
-
-.tilly-sticker--icon-only a {
-    gap: 0;
-    justify-content: center;
 }
 
 /* ── TikTok: negro con acento cyan/rosa ── */
@@ -768,21 +761,19 @@
 
 @media (min-width: 680px) {
     .tilly-roadmap-wrap {
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
-        justify-content: space-between;
         gap: 1.5rem;
     }
 
     .tilly-roadmap {
-        flex: 1;
-        min-width: 0;
+        width: 100%;
         margin-top: 0;
     }
 
     .tilly-social-stickers {
-        flex: 0 0 auto;
-        align-items: flex-end;
+        justify-content: center;
+        align-items: center;
     }
 }
 
