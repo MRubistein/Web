@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   Te quiero, Tilly — Estilo "diario personal"
+   Te quiero, Tilly — Estilo "diario personal / cuaderno"
    Prefijo .tilly- para evitar colisiones con styles.css
    ═══════════════════════════════════════════════════════ */
 
@@ -24,7 +24,8 @@
     --tilly-white: #fffdf7;
     --tilly-success: #6a9a5b;
     --tilly-locked: #c8c0b6;
-    --tilly-font-hand: "Caveat", cursive;
+    --tilly-font-hand: "Comic Sans MS", "Comic Sans", cursive, sans-serif;
+    --tilly-font-display: "Reenie Beanie", cursive;
     --tilly-font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
     --tilly-font-body: "Raleway", "Merriweather Sans", Helvetica, Arial, sans-serif;
     --tilly-radius: 4px;
@@ -44,6 +45,8 @@
     font-family: var(--tilly-font-body);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
+    position: relative;
+    overflow-x: hidden;
 }
 
 .tilly-section {
@@ -53,27 +56,91 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   1. HERO — Foto pegada al lado del texto
+   DOODLES / MARCAS DE AGUA — Apuntes de fondo en el cuaderno
    ═══════════════════════════════════════════════════════ */
-.tilly-hero {
-    padding-top: 3rem;
-    padding-bottom: 2.5rem;
+.tilly-doodle,
+.tilly-watermark {
+    position: absolute;
+    font-family: var(--tilly-font-display);
+    color: var(--tilly-pink-soft);
+    opacity: 0.38;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    white-space: nowrap;
+    line-height: 0.9;
 }
 
+/* TQT: parte superior derecha, libre de fotos */
+.tilly-doodle--tqt {
+    top: 10px;
+    right: 3%;
+    font-size: clamp(3rem, 7.5vw, 4.8rem);
+    text-align: right;
+    transform: rotate(6deg);
+}
+
+.tilly-doodle--tqt span {
+    font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+    display: block;
+    margin-top: 0.15rem;
+    letter-spacing: 0.5px;
+}
+
+/* "Attention is all you need": pie del hero / bajo el roadmap */
+.tilly-doodle--attention {
+    bottom: 8px;
+    left: 2%;
+    font-size: clamp(1.6rem, 4.2vw, 2.8rem);
+    transform: rotate(-3.5deg);
+    opacity: 0.32;
+}
+
+/* ">.<": parte superior de la sección VS */
+.tilly-doodle--kaomoji {
+    top: 12px;
+    right: 4%;
+    font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+    transform: rotate(14deg);
+    opacity: 0.35;
+}
+
+/* ";)": parte inferior de la sección VS */
+.tilly-doodle--wink {
+    bottom: 12px;
+    left: 4%;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    transform: rotate(-12deg);
+    opacity: 0.35;
+}
+
+/* ═══════════════════════════════════════════════════════
+   1. HERO
+   ═══════════════════════════════════════════════════════ */
+.tilly-hero {
+    padding-top: 2.5rem;
+    padding-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Disposición lado a lado permanente */
 .tilly-hero__layout {
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.1rem;
+    position: relative;
+    z-index: 1;
 }
 
 /* ── Foto "pegada" con cinta adhesiva ── */
 .tilly-hero__photo-wrapper {
     position: relative;
     flex-shrink: 0;
-    width: 220px;
+    width: clamp(115px, 32vw, 155px);
     transform: rotate(-2deg);
-    padding: 8px;
+    padding: 6px;
     background: #fff;
     box-shadow:
         2px 3px 8px rgba(0, 0, 0, 0.12),
@@ -81,14 +148,13 @@
     border-radius: 2px;
 }
 
-/* Cinta adhesiva superior */
 .tilly-hero__tape {
     position: absolute;
-    top: -10px;
+    top: -8px;
     left: 50%;
     transform: translateX(-50%) rotate(2deg);
-    width: 80px;
-    height: 20px;
+    width: 60px;
+    height: 18px;
     background: var(--tilly-yellow);
     opacity: 0.65;
     border-radius: 2px;
@@ -107,54 +173,50 @@
 
 /* ── Contenido del hero ── */
 .tilly-hero__content {
+    flex: 1;
+    min-width: 0;
     color: var(--tilly-text);
+    position: relative;
+    z-index: 1;
 }
 
+/* Título en Reenie Beanie, mayúsculas, negrita y con tamaño aumentado */
 .tilly-hero__title {
-    font-family: var(--tilly-font-hand);
-    font-size: clamp(2rem, 6vw, 2.8rem);
+    font-family: var(--tilly-font-display);
+    font-size: clamp(1.75rem, 5vw, 2.7rem);
     font-weight: 700;
-    line-height: 1.1;
-    margin: 0 0 1rem;
-    transform: rotate(-0.5deg);
+    -webkit-text-stroke: 0.4px currentColor;
+    line-height: 1.05;
+    margin: 0 0 0.5rem;
+    transform: rotate(-1.5deg);
+    text-transform: uppercase;
 }
 
+/* Subtítulos en Caveat, algo más grandes y torcidos */
 .tilly-hero__subtitle {
     font-family: var(--tilly-font-hand);
-    font-size: clamp(1.1rem, 3vw, 1.35rem);
-    font-weight: 400;
-    line-height: 1.45;
-    margin: 0 0 0.5rem;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0 0 0.45rem;
     color: var(--tilly-text-mid);
+}
+
+.tilly-hero__subtitle:first-of-type {
+    transform: rotate(0.4deg);
+}
+
+.tilly-hero__subtitle:last-of-type {
+    transform: rotate(-0.6deg);
 }
 
 .tilly-hero__subtitle strong {
     color: var(--tilly-text);
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: underline;
     text-decoration-style: wavy;
     text-underline-offset: 3px;
     text-decoration-color: var(--tilly-pink);
-}
-
-.tilly-hero__counter {
-    display: inline-block;
-    font-family: var(--tilly-font-hand);
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 1rem 0 1.3rem;
-    opacity: 0.7;
-    background: var(--tilly-yellow-soft);
-    padding: 0.25rem 0.7rem;
-    border-radius: 20px;
-    border: 1px dashed var(--tilly-border);
-}
-
-.tilly-hero__ctas {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1.2rem;
 }
 
 /* ── Botones estilo "pegatina" ── */
@@ -170,7 +232,6 @@
     text-decoration: none;
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.25s ease;
     border: 2px dashed transparent;
     text-align: center;
     position: relative;
@@ -186,8 +247,8 @@
 
 .tilly-btn--primary:hover {
     background: var(--tilly-accent-hover);
-    transform: rotate(0deg) translateY(-2px);
-    box-shadow: 3px 4px 0px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    text-decoration: none;
 }
 
 .tilly-btn--ghost {
@@ -200,208 +261,288 @@
 .tilly-btn--ghost:hover {
     border-color: var(--tilly-accent);
     color: var(--tilly-accent);
-    transform: rotate(0deg) translateY(-1px);
-}
-
-.tilly-hero__disclaimer {
-    font-size: 0.72rem;
-    opacity: 0.45;
-    cursor: pointer;
-    transition: opacity 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    background: none;
-    border: none;
-    color: var(--tilly-text-light);
-    padding: 0;
-    font-family: var(--tilly-font-body);
-}
-
-.tilly-hero__disclaimer:hover {
-    opacity: 0.7;
-}
-
-.tilly-disclaimer-tooltip {
-    display: none;
-    position: absolute;
-    bottom: calc(100% + 8px);
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.9);
-    color: rgba(255, 255, 255, 0.8);
-    padding: 0.8rem 1rem;
-    border-radius: var(--tilly-radius);
-    font-size: 0.75rem;
-    line-height: 1.5;
-    z-index: 10;
-    max-width: 340px;
-}
-
-.tilly-disclaimer-tooltip.is-visible {
-    display: block;
+    text-decoration: none;
 }
 
 /* ═══════════════════════════════════════════════════════
-   2. VOTACIÓN
+   2. ROADMAP + REDES AL LADO
    ═══════════════════════════════════════════════════════ */
-.tilly-poll {
-    background: var(--tilly-bg-page);
-    border-top: 3px dashed var(--tilly-border-dotted);
-    border-bottom: 3px dashed var(--tilly-border-dotted);
-    position: relative;
-    transform: rotate(0.3deg);
-}
-
-/* Decoración de "cinta adhesiva" arriba */
-.tilly-poll::before {
-    content: "";
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%) rotate(-2deg);
-    width: 80px;
-    height: 16px;
-    background: var(--tilly-yellow);
-    opacity: 0.7;
-    border-radius: 2px;
-    z-index: 2;
-}
-
-.tilly-poll__question {
-    font-family: var(--tilly-font-hand);
-    font-size: clamp(1.5rem, 5vw, 2rem);
-    font-weight: 700;
-    margin: 0 0 0.8rem;
-    line-height: 1.2;
-    color: var(--tilly-accent);
-}
-
-.tilly-poll__context,
-.tilly-poll__dilemma {
-    font-family: var(--tilly-font-hand);
-    font-size: 1.1rem;
-    color: var(--tilly-text-mid);
-    margin: 0 0 0.4rem;
-    font-style: normal;
-}
-
-.tilly-poll__dilemma {
-    margin-bottom: 1.2rem;
-}
-
-.tilly-poll__question-short {
-    font-family: var(--tilly-font-hand);
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--tilly-text);
-    margin: 0 0 1rem;
-    text-decoration: underline;
-    text-decoration-style: wavy;
-    text-underline-offset: 4px;
-    text-decoration-color: var(--tilly-pink);
-}
-
-.tilly-poll__options {
+.tilly-roadmap-wrap {
+    margin-top: 2.2rem;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
 }
 
-.tilly-poll__option-btn {
-    display: block;
+.tilly-roadmap {
     width: 100%;
-    padding: 1rem 1.2rem;
-    font-family: var(--tilly-font-hand);
-    font-size: 1.05rem;
-    font-weight: 600;
-    text-align: left;
-    background: var(--tilly-white);
-    color: var(--tilly-text);
-    border: 2px dashed var(--tilly-border);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.25s ease;
+    text-align: center;
     position: relative;
-    overflow: hidden;
+    z-index: 1;
+}
+
+.tilly-roadmap__goal {
+    font-family: var(--tilly-font-hand);
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    font-weight: 700;
+    margin: 0 0 2rem;
+    line-height: 1.2;
+    color: var(--tilly-text);
+    transform: rotate(-1.2deg);
+}
+
+.tilly-roadmap__goal-pre {
+    font-weight: 600;
+    color: var(--tilly-text-mid);
+    font-style: italic;
+}
+
+.tilly-roadmap__path {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    padding: 0 0.5rem;
+}
+
+/* Línea irregular que conecta los pasos */
+.tilly-roadmap__path::before {
+    content: "";
+    position: absolute;
+    top: 26px;
+    left: 12%;
+    right: 12%;
+    height: 4px;
+    z-index: 0;
+    background:
+        repeating-linear-gradient(90deg,
+            var(--tilly-border-dotted) 0px,
+            var(--tilly-border-dotted) 8px,
+            transparent 8px,
+            transparent 12px);
+    border-radius: 2px;
+    transform: rotate(0.5deg);
+    filter: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.015' numOctaves='2' seed='3'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='4'/%3E%3C/filter%3E%3C/svg%3E#w");
+}
+
+.tilly-roadmap__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    max-width: 180px;
+}
+
+/* Offset vertical irregular */
+.tilly-roadmap__step:nth-child(1) {
+    transform: translateY(2px);
+}
+
+.tilly-roadmap__step:nth-child(2) {
+    transform: translateY(-4px);
+}
+
+.tilly-roadmap__step:nth-child(3) {
+    transform: translateY(1px);
+}
+
+/* Círculo del paso */
+.tilly-roadmap__circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--tilly-white);
+    border: 3px solid var(--tilly-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--tilly-font-hand);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--tilly-text-light);
+    margin-bottom: 0.6rem;
     box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.06);
 }
 
-.tilly-poll__option-btn:first-child {
-    transform: rotate(-0.5deg);
-}
-
-.tilly-poll__option-btn:last-child {
-    transform: rotate(0.5deg);
-}
-
-.tilly-poll__option-btn:hover {
-    border-color: var(--tilly-accent);
-    color: var(--tilly-accent);
-    transform: rotate(0deg) translateY(-2px);
-    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
-}
-
-.tilly-poll__option-btn:disabled {
-    cursor: default;
-    opacity: 1;
-}
-
-.tilly-poll__note {
+.tilly-roadmap__step-label {
     font-family: var(--tilly-font-hand);
     font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--tilly-text-mid);
+    line-height: 1.2;
+    text-align: center;
+    padding: 0 0.3rem;
+}
+
+/* Paso activo */
+.tilly-roadmap__step--active .tilly-roadmap__circle {
+    border-color: var(--tilly-accent);
+    background: var(--tilly-accent);
+    color: #fff;
+    box-shadow: 3px 3px 0px rgba(199, 90, 58, 0.25);
+    transform: scale(1.1);
+}
+
+.tilly-roadmap__step--active .tilly-roadmap__step-label {
+    color: var(--tilly-text);
+    font-weight: 700;
+}
+
+/* Paso completado */
+.tilly-roadmap__step--done .tilly-roadmap__circle {
+    border-color: var(--tilly-success);
+    background: var(--tilly-success);
+    color: #fff;
+}
+
+.tilly-roadmap__step--done .tilly-roadmap__step-label {
     color: var(--tilly-text-light);
-    margin-top: 0.5rem;
 }
 
-/* ── Resultados de votación ── */
-.tilly-poll__result {
+/* ═══════════════════════════════════════════════════════
+   3. ¿MATEO o MATEO IA?
+   ═══════════════════════════════════════════════════════ */
+.tilly-vs-section {
+    border-top: 3px dashed var(--tilly-border-dotted);
+    position: relative;
+    overflow: hidden;
+}
+
+.tilly-vs-layout {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.tilly-vs {
+    text-align: center;
+    width: 100%;
+}
+
+/* Contenedor ¿ [foto] o [foto] ? */
+.tilly-vs__compare {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tilly-vs__q-mark {
+    font-family: var(--tilly-font-display);
+    font-size: clamp(3rem, 10vw, 5rem);
+    font-weight: 400;
+    color: var(--tilly-accent);
+    line-height: 1;
+    flex-shrink: 0;
+    user-select: none;
+}
+
+.tilly-vs__q-mark--open {
+    transform: rotate(-3deg);
+}
+
+.tilly-vs__q-mark--close {
+    transform: rotate(2deg);
+}
+
+.tilly-vs__separator {
+    font-family: var(--tilly-font-hand);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+    color: var(--tilly-text-mid);
+    flex-shrink: 0;
+    line-height: 1;
+    transform: rotate(-2deg);
+}
+
+.tilly-vs__card {
+    position: relative;
+    padding: 5px;
+    background: #fff;
+    box-shadow:
+        2px 3px 8px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+#tilly-vs-card-real {
+    transform: rotate(-1.5deg);
+}
+
+#tilly-vs-card-ai {
+    transform: rotate(1.5deg);
+}
+
+.tilly-vs__img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center top;
+    background: var(--tilly-bg-warm);
+}
+
+.tilly-vs__label {
+    display: block;
+    font-family: var(--tilly-font-hand);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--tilly-text);
+    padding: 0.3rem 0 0.15rem;
+    text-align: center;
+}
+
+.tilly-vs__buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.tilly-vs__buttons .tilly-btn {
+    min-width: 130px;
+}
+
+/* Resultado de la votación */
+.tilly-vs__result {
     display: none;
+    max-width: 400px;
+    margin: 1rem auto 0;
 }
 
-.tilly-poll__result.is-visible {
+.tilly-vs__result.is-visible {
     display: block;
 }
 
-.tilly-poll__voted-msg {
-    font-family: var(--tilly-font-hand);
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin: 0 0 0.25rem;
-    color: var(--tilly-accent);
-}
-
-.tilly-poll__voted-pct {
-    font-family: var(--tilly-font-hand);
-    font-size: 1.1rem;
-    color: var(--tilly-text-mid);
-    margin: 0 0 1.5rem;
-}
-
-.tilly-poll__bar-container {
-    margin-bottom: 1.5rem;
-}
-
-.tilly-poll__bar-row {
+.tilly-vs__bar-row {
     display: flex;
     align-items: center;
     margin-bottom: 0.75rem;
     gap: 0.75rem;
 }
 
-.tilly-poll__bar-label {
+.tilly-vs__bar-label {
     font-family: var(--tilly-font-hand);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--tilly-text-mid);
-    min-width: 0;
-    flex-shrink: 1;
-    flex-basis: 40%;
-    line-height: 1.3;
+    min-width: 80px;
+    text-align: left;
 }
 
-.tilly-poll__bar-track {
+.tilly-vs__bar-track {
     flex-grow: 1;
     height: 10px;
     background: var(--tilly-border);
@@ -410,18 +551,21 @@
     border: 1px dashed rgba(0, 0, 0, 0.08);
 }
 
-.tilly-poll__bar-fill {
+.tilly-vs__bar-fill {
     height: 100%;
     border-radius: 5px;
-    background: var(--tilly-accent);
     transition: width 0.6s ease;
 }
 
-.tilly-poll__bar-fill--b {
+.tilly-vs__bar-fill--real {
+    background: var(--tilly-accent);
+}
+
+.tilly-vs__bar-fill--ai {
     background: var(--tilly-pink);
 }
 
-.tilly-poll__bar-pct {
+.tilly-vs__bar-pct {
     font-family: var(--tilly-font-hand);
     font-size: 1rem;
     font-weight: 700;
@@ -430,340 +574,215 @@
     text-align: right;
 }
 
-.tilly-poll__total-votes {
+.tilly-vs__total {
     font-family: var(--tilly-font-hand);
     font-size: 0.95rem;
     color: var(--tilly-text-light);
     margin-top: 0.25rem;
 }
 
-.tilly-poll__closed-msg {
-    font-family: var(--tilly-font-hand);
-    font-size: 1rem;
-    color: var(--tilly-text-light);
-    padding: 1rem 0;
-}
-
 /* ═══════════════════════════════════════════════════════
-   3. RESULTADO + COMPARTIR
+   PEGATINAS DE REDES — al lado del roadmap
    ═══════════════════════════════════════════════════════ */
-.tilly-share {
-    display: none;
-    text-align: center;
-    padding-top: 0;
-}
-
-.tilly-share.is-visible {
-    display: block;
-}
-
-.tilly-share__btns {
+.tilly-social-stickers {
     display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.tilly-btn--share {
-    background: var(--tilly-text);
-    color: var(--tilly-white);
-    font-size: 0.95rem;
-    padding: 0.7rem 1.3rem;
-    border-radius: 10px;
-    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.12);
-}
-
-.tilly-btn--share:hover {
-    background: var(--tilly-text-mid);
-}
-
-.tilly-btn--copy {
-    background: transparent;
-    color: var(--tilly-text);
-    border: 2px dashed var(--tilly-border);
-    font-size: 0.95rem;
-    padding: 0.7rem 1.3rem;
-    border-radius: 10px;
-}
-
-.tilly-btn--copy:hover {
-    border-color: var(--tilly-text);
-}
-
-.tilly-share__feedback {
-    font-family: var(--tilly-font-hand);
-    font-size: 1rem;
-    color: var(--tilly-success);
-    margin-top: 0.5rem;
-    min-height: 1.2rem;
-}
-
-/* ═══════════════════════════════════════════════════════
-   4. ÚLTIMO INTENTO (VÍDEO)
-   ═══════════════════════════════════════════════════════ */
-.tilly-latest {
-    border-top: 3px dashed var(--tilly-border-dotted);
-    position: relative;
-}
-
-.tilly-section-label {
-    font-family: var(--tilly-font-hand);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--tilly-text-light);
-    margin: 0 0 1.2rem;
-    display: inline-block;
-    background: var(--tilly-yellow-soft);
-    padding: 0.2rem 0.8rem;
-    border-radius: 4px;
-    transform: rotate(-1deg);
-    border: 1px dashed var(--tilly-border);
-}
-
-.tilly-latest__title {
-    font-family: var(--tilly-font-hand);
-    font-size: clamp(1.5rem, 5vw, 2rem);
-    font-weight: 700;
-    margin: 0 0 0.5rem;
-    line-height: 1.2;
-}
-
-.tilly-latest__attempt-label {
-    font-family: var(--tilly-font-hand);
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--tilly-accent);
-    margin: 0 0 0.6rem;
-}
-
-.tilly-latest__desc {
-    font-family: var(--tilly-font-hand);
-    font-size: 1.1rem;
-    color: var(--tilly-text-mid);
-    margin: 0 0 1.5rem;
-    line-height: 1.5;
-}
-
-/* ── Reproductor lazy ── */
-.tilly-player {
-    position: relative;
-    width: 100%;
-    max-width: 340px;
-    margin: 0 auto 2rem;
-    aspect-ratio: 9 / 16;
-    border-radius: 2px;
-    overflow: hidden;
-    background: #111;
-    cursor: pointer;
-    /* Estilo foto pegada */
-    padding: 6px;
-    background: #fff;
-    box-shadow:
-        2px 3px 8px rgba(0, 0, 0, 0.12),
-        0 0 0 1px rgba(0, 0, 0, 0.04);
-    transform: rotate(1deg);
-}
-
-.tilly-player__poster {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.tilly-player__play {
-    position: absolute;
-    inset: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.2);
-    transition: background 0.2s;
-}
-
-.tilly-player:hover .tilly-player__play {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.tilly-player__play-icon {
-    width: 56px;
-    height: 56px;
-    background: rgba(255, 255, 255, 0.92);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s;
-}
-
-.tilly-player:hover .tilly-player__play-icon {
-    transform: scale(1.08);
-}
-
-.tilly-player__play-icon svg {
-    width: 20px;
-    height: 20px;
-    fill: var(--tilly-text);
-    margin-left: 3px;
-}
-
-.tilly-player iframe {
-    position: absolute;
-    inset: 6px;
-    width: calc(100% - 12px);
-    height: calc(100% - 12px);
-    border: 0;
-}
-
-.tilly-player__fallback {
-    display: none;
-    position: absolute;
-    inset: 6px;
-    background: rgba(0, 0, 0, 0.75);
-    color: #fff;
     flex-direction: column;
+    gap: 0.6rem;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    font-family: var(--tilly-font-hand);
-    font-size: 1rem;
-    font-weight: 600;
+    width: auto;
 }
 
-.tilly-player__fallback.is-visible {
+.tilly-social-stickers__icons {
     display: flex;
+    gap: 0.6rem;
+    align-items: center;
 }
 
-/* ── Social links del intento ── */
-.tilly-latest__social-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
+.tilly-sticker {
+    border-radius: 14px;
+    padding: 0.45rem 0.85rem;
+    box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.12);
+    width: auto;
+    border: none;
 }
 
-.tilly-social-link {
-    font-family: var(--tilly-font-hand);
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--tilly-text-light);
-    text-decoration: none;
-    transition: color 0.2s;
-    border-bottom: 1px dashed var(--tilly-border);
-    padding-bottom: 2px;
-}
-
-.tilly-social-link:hover {
-    color: var(--tilly-accent);
-    border-bottom-color: var(--tilly-accent);
-}
-
-/* ═══════════════════════════════════════════════════════
-   8. CTA FINAL
-   ═══════════════════════════════════════════════════════ */
-.tilly-cta-final {
-    border-top: 3px dashed var(--tilly-border-dotted);
-    text-align: center;
-    position: relative;
-    transform: rotate(-0.2deg);
-}
-
-.tilly-cta-final__title {
-    font-family: var(--tilly-font-hand);
-    font-size: clamp(1.5rem, 5vw, 2rem);
-    font-weight: 700;
-    margin: 0 0 0.5rem;
-    line-height: 1.2;
-}
-
-.tilly-cta-final__subtitle {
-    font-family: var(--tilly-font-hand);
-    font-size: 1.1rem;
-    color: var(--tilly-text-mid);
-    margin: 0 0 1.5rem;
-}
-
-.tilly-cta-final__links {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.tilly-cta-final__link {
+.tilly-sticker a {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    font-family: var(--tilly-font-hand);
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--tilly-text);
+    gap: 0.45rem;
     text-decoration: none;
-    padding: 0.5rem 0.9rem;
-    border: 2px dashed var(--tilly-border);
-    border-radius: 10px;
-    transition: all 0.25s;
-    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.06);
+    font-family: var(--tilly-font-hand);
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
-.tilly-cta-final__link:hover {
-    border-color: var(--tilly-accent);
-    color: var(--tilly-accent);
-    transform: translateY(-2px);
-    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+.tilly-sticker a:hover {
+    text-decoration: none;
 }
 
-.tilly-cta-final__link svg {
-    width: 18px;
-    height: 18px;
+.tilly-sticker__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+}
+
+.tilly-sticker__icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* ── Instagram: gradiente con texto más pequeño ── */
+.tilly-sticker--ig {
+    background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7);
+    transform: rotate(-1.5deg);
+    padding: 0.4rem 0.8rem;
+}
+
+.tilly-sticker--ig a {
+    color: #fff;
+}
+
+.tilly-sticker--ig .tilly-sticker__icon svg {
+    stroke: #fff;
+    fill: none;
+}
+
+.tilly-sticker--ig .tilly-sticker__text {
+    font-size: 0.8rem;
+    line-height: 1.15;
+    white-space: nowrap;
+}
+
+/* ── Stickers solo icono (TikTok y YouTube) ── */
+.tilly-sticker--icon-only {
+    padding: 0.45rem;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+}
+
+.tilly-sticker--icon-only a {
+    gap: 0;
+    justify-content: center;
+}
+
+/* ── TikTok: negro con acento cyan/rosa ── */
+.tilly-sticker--tk {
+    background: linear-gradient(135deg, #010101, #25f4ee);
+    transform: rotate(2deg);
+}
+
+.tilly-sticker--tk a {
+    color: #fff;
+}
+
+.tilly-sticker--tk .tilly-sticker__icon svg {
+    fill: #fe2c55;
+}
+
+/* ── YouTube: rojo ── */
+.tilly-sticker--yt {
+    background: linear-gradient(135deg, #ff0000, #cc0000);
+    transform: rotate(-2deg);
+}
+
+.tilly-sticker--yt a {
+    color: #fff;
+}
+
+.tilly-sticker--yt .tilly-sticker__icon svg {
+    stroke: #fff;
+    fill: none;
 }
 
 /* ═══════════════════════════════════════════════════════
-   LOADING / ERROR
+   4. DISCLAIMER (abajo del todo)
    ═══════════════════════════════════════════════════════ */
-.tilly-loading {
-    display: none;
+.tilly-disclaimer-bottom {
     text-align: center;
-    padding: 1rem 0;
+    padding: 1.5rem 1.5rem 2rem;
+    max-width: var(--tilly-max-width);
+    margin: 0 auto;
+}
+
+.tilly-disclaimer-bottom__btn {
+    font-family: var(--tilly-font-body);
+    font-size: 0.75rem;
     color: var(--tilly-text-light);
-    font-family: var(--tilly-font-hand);
-    font-size: 1rem;
+    opacity: 0.5;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 1px dotted var(--tilly-border);
+    padding: 0.2rem 0;
 }
 
-.tilly-loading.is-visible {
-    display: block;
+.tilly-disclaimer-bottom__btn:hover {
+    opacity: 0.8;
 }
 
-.tilly-error {
+.tilly-disclaimer-bottom__content {
     display: none;
-    text-align: center;
-    padding: 1rem;
-    color: var(--tilly-accent);
-    font-family: var(--tilly-font-hand);
-    font-size: 1rem;
-    background: rgba(199, 90, 58, 0.06);
-    border-radius: 8px;
-    border: 1px dashed var(--tilly-accent-soft);
+    font-family: var(--tilly-font-body);
+    font-size: 0.72rem;
+    color: var(--tilly-text-light);
+    opacity: 0.6;
+    margin-top: 0.6rem;
+    line-height: 1.6;
 }
 
-.tilly-error.is-visible {
+.tilly-disclaimer-bottom__content.is-visible {
     display: block;
 }
 
 /* ═══════════════════════════════════════════════════════
-   RESPONSIVE — Tablet / Desktop
+   RESPONSIVE
    ═══════════════════════════════════════════════════════ */
 @media (min-width: 600px) {
     .tilly-hero__layout {
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 2.5rem;
+        gap: 2.2rem;
     }
 
     .tilly-hero__photo-wrapper {
-        width: 240px;
+        width: 220px;
+        padding: 8px;
+    }
+
+    .tilly-hero__tape {
+        top: -10px;
+        width: 80px;
+        height: 20px;
+    }
+
+    .tilly-vs-layout {
+        justify-content: center;
+    }
+}
+
+@media (min-width: 680px) {
+    .tilly-roadmap-wrap {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+    }
+
+    .tilly-roadmap {
+        flex: 1;
+        min-width: 0;
+        margin-top: 0;
+    }
+
+    .tilly-social-stickers {
+        flex: 0 0 auto;
+        align-items: flex-end;
     }
 }
 
@@ -780,25 +799,23 @@
         width: 280px;
     }
 
-    .tilly-hero__ctas {
-        flex-direction: row;
+    .tilly-roadmap__circle {
+        width: 56px;
+        height: 56px;
+        font-size: 1.5rem;
     }
 
-    .tilly-poll__options {
-        flex-direction: row;
+    .tilly-roadmap__step-label {
+        font-size: 1.05rem;
     }
 
-    .tilly-poll__option-btn {
-        flex: 1;
+    .tilly-vs__compare {
+        max-width: 580px;
+        gap: 0.8rem;
     }
 
-    .tilly-poll__bar-label {
-        flex-basis: auto;
-        min-width: 140px;
-    }
-
-    .tilly-player {
-        max-width: 300px;
+    .tilly-social-stickers {
+        gap: 1rem;
     }
 }
 
@@ -812,6 +829,6 @@
     }
 
     .tilly-hero__photo-wrapper {
-        width: 300px;
+        width: 280px;
     }
 }
