@@ -4917,3 +4917,242 @@ body.lightbox-open {
         padding-bottom: 3.5rem;
     }
 }
+
+/* ==========================================================================
+   Home Photos Preview Section
+   ========================================================================== */
+.home-photos-section {
+    padding: 3rem 0 3.5rem;
+}
+
+.home-section-header {
+    text-align: center;
+    margin-bottom: 2.25rem;
+}
+
+.home-section-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 0.35rem;
+}
+
+.home-section-header .home-section-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a1a24;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.home-section-header .home-section-view-all:hover {
+    color: #0056b3;
+    transform: translateX(3px);
+}
+
+.home-photos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.home-photos-grid-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    aspect-ratio: 3 / 4;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-photos-grid-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.home-photos-grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.home-photos-grid-item:hover img {
+    transform: scale(1.08);
+}
+
+.home-photos-grid-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.home-photos-grid-item:hover::after {
+    opacity: 1;
+}
+
+@media (max-width: 767.98px) {
+    .home-photos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 479.98px) {
+    .home-photos-grid {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+        gap: 1rem;
+    }
+}
+
+/* ==========================================================================
+   Home Instagram Link – Minimalist & Elegant
+   ========================================================================== */
+.home-instagram-section {
+    padding: 2.5rem 1rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-instagram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.75rem 1.6rem;
+    font-family: "Raleway", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: #1a1a24;
+    background: #ffffff;
+    border: 1px solid rgba(26, 26, 36, 0.16);
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-instagram-link svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    transition: transform 0.3s ease;
+}
+
+.home-instagram-link:hover {
+    color: #ffffff;
+    background: #1a1a24;
+    border-color: #1a1a24;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26, 26, 36, 0.18);
+    text-decoration: none;
+}
+
+.home-instagram-link:hover svg {
+    transform: scale(1.1);
+}
+
+.home-instagram-link:focus {
+    text-decoration: none;
+}
+
+@media (max-width: 575.98px) {
+    .home-instagram-link {
+        padding: 0.65rem 1.35rem;
+        font-size: 0.88rem;
+        letter-spacing: 1.2px;
+    }
+
+    .home-instagram-link svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* ==========================================================================
+   Home Video CTA Tab / Pill – Elegant & Minimalist
+   ========================================================================== */
+.home-video-cta-section {
+    padding: 0.75rem 1rem 4.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-video-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.85rem;
+    font-family: "Raleway", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    color: #1a1a24;
+    background: #ffffff;
+    border: 1px solid rgba(26, 26, 36, 0.16);
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-video-pill .home-video-play-icon {
+    width: 13px;
+    height: 13px;
+    fill: currentColor;
+    transition: transform 0.3s ease;
+}
+
+.home-video-pill .home-video-arrow-icon {
+    width: 15px;
+    height: 15px;
+    stroke: currentColor;
+    transition: transform 0.3s ease;
+}
+
+.home-video-pill:hover {
+    color: #ffffff;
+    background: #1a1a24;
+    border-color: #1a1a24;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26, 26, 36, 0.18);
+    text-decoration: none;
+}
+
+.home-video-pill:hover .home-video-play-icon {
+    transform: scale(1.15);
+}
+
+.home-video-pill:hover .home-video-arrow-icon {
+    transform: translateX(3px);
+}
+
+.home-video-pill:focus {
+    text-decoration: none;
+}
+
+@media (max-width: 575.98px) {
+    .home-video-cta-section {
+        padding: 0.5rem 1rem 3.5rem;
+    }
+
+    .home-video-pill {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.88rem;
+        letter-spacing: 1.5px;
+        gap: 0.65rem;
+    }
+}

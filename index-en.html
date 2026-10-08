@@ -162,41 +162,12 @@
         </div>
     </div>
 
-    <!-- Welcome Text -->
-    <div class="col-sm-12 col-md-12 col-lg-4 offset-lg-4 justify-center" style="margin-top: 1.8rem;">
-        <strong>
-            <h6>
-                Hello! Here you will find latest news and content about my work, updated every week.
-                <br>Feel free to discover and browse the web. <br>
 
-                Lights, camera, action! <br>
-                <em>MR</em>
-            </h6>
-        </strong>
-
-    </div><br>
-
-    <!-- Featured Showreel -->
-    <div class="row no-gutters">
-        <div class=" col-sm-6  offset-sm-2 col-md-8 offset-md-2 col-lg-4 offset-lg-4 d-flex">
-            <iframe title="vimeo-player" src="https://player.vimeo.com/video/1175106898?h=344fdab1ce" width="640"
-                height="360" frameborder="0" referrerpolicy="strict-origin-when-cross-origin"
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                allowfullscreen></iframe>
-
-        </div>
-    </div>
-
-
-    <br />
-
-
-
-    <!-- News Section -->
+    <!-- 1. Press Section -->
     <section class="home-news-section">
         <div class="container">
             <div class="home-news-header">
-                <h2>Latest News</h2>
+                <h2>Press</h2>
                 <a href="english/noticias.html" class="home-news-view-all">
                     Recent projects, filming and updates
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -307,6 +278,8 @@
                             inner.appendChild(slide);
 
                             var indicator = document.createElement('li');
+                            indicator.setAttribute('data-target', '#recipeCarousel');
+                            indicator.setAttribute('data-slide-to', slideIndex.toString());
                             (function (targetIdx) {
                                 indicator.addEventListener('click', function (e) {
                                     e.preventDefault();
@@ -425,6 +398,62 @@
                 });
         })();
     </script>
+
+    <!-- 2. Photos Section -->
+    <section class="home-photos-section">
+        <div class="container">
+            <div class="home-section-header">
+                <h2>Photos</h2>
+                <a href="english/fotos.html" class="home-section-view-all">
+                    See full gallery
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
+            <div class="home-photos-grid">
+                <a class="portfolio home-photos-grid-item" href="assets/img/fotos/MATEO_RUBISTEIN1.jpg">
+                    <img src="assets/img/fotos/MATEO_RUBISTEIN1.jpg"
+                        alt="A picture of the actor Mateo Rubistein 1" />
+                </a>
+                <a class="portfolio home-photos-grid-item" href="assets/img/fotos/MATEO_RUBISTEIN2.jpg">
+                    <img loading="lazy" src="assets/img/fotos/MATEO_RUBISTEIN2.jpg"
+                        alt="A picture of the actor Mateo Rubistein 2" />
+                </a>
+                <a class="portfolio home-photos-grid-item" href="assets/img/fotos/MATEO_RUBISTEIN3.jpg">
+                    <img loading="lazy" src="assets/img/fotos/MATEO_RUBISTEIN3.jpg"
+                        alt="A picture of the actor Mateo Rubistein 3" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Instagram -->
+    <section class="home-instagram-section">
+        <a href="https://www.instagram.com/mateorubistein/" target="_blank" rel="noopener" class="home-instagram-link" aria-label="Instagram @mateorubistein">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+            </svg>
+            <span>@mateorubistein</span>
+        </a>
+    </section>
+
+    <!-- 4. Videos Tab -->
+    <section class="home-video-cta-section">
+        <a href="english/video.html" class="home-video-pill" aria-label="View videos of Mateo Rubistein">
+            <svg class="home-video-play-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <polygon points="6 4 20 12 6 20 6 4"></polygon>
+            </svg>
+            <span>Videos</span>
+            <svg class="home-video-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </a>
+    </section>
 
     <!-- Footer -->
     <footer class="bg-light py-5">
